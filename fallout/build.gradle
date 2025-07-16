@@ -12,7 +12,6 @@ version = versionNumber+versionMarker
 // Dependencies
 dependencies {
     implementation project(':core')
-    implementation project(':fallout')
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // implementation 'org.springframework.boot:spring-boot-starter-security' // Only when starting login-phase
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -23,48 +22,8 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
     // implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // Only when starting login-phase
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // testImplementation 'org.springframework.security:spring-security-test' // Only when starting login-phase
-}
-
-// Disabling default jar [use bootJar]
-jar {
-    enabled = false
-}
-
-// Specify to directly use sourceSets istead of copying it in 'build' during bootRun (useful to live-edit resources)
-bootRun {
-    sourceResources sourceSets.main
-    classpath += files(project(":fallout").file("src/main/resources"))
-}
-
-// BootJar Definition
-bootJar {
-    manifest {
-        attributes "Title" : "WebTRPG"
-        attributes "Vendor" : "ItalianDudes"
-        attributes "Version" : archiveVersion.get()
-        attributes "Version-Number" : archiveVersion.get()
-        attributes "Version-Type" : versionType
-        attributes "Version-Marker" : versionMarker
-        attributes "Timestamp" : new Date().format("dd/MM/yyyy HH:mm:ss.sss")
-    }
-    archiveFileName = getRootDir().getName() + "-" + archiveVersion.get() + ".jar"
-}
-
-// Dev Tasks
-tasks.register('runServer') {
-    dependsOn bootRun
-    group = "Execution"
-    description = "Build, assemble and run the web server"
-}
-
-// Deployment Tasks
-tasks.register('deployJar') {
-    dependsOn bootJar
-    group = "Deployment"
-    description = "Build, assemble and deploy the web server as a fat-jar"
 }

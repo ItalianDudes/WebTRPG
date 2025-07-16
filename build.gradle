@@ -11,15 +11,25 @@ allprojects {
 
 // Apply to all (root excluded)
 subprojects {
+    // Adding Java
     apply plugin: 'java'
 
+    // Java Version
     java {
         toolchain {
             languageVersion = JavaLanguageVersion.of(21)
         }
     }
 
+    // Base Repositories
     repositories {
         mavenCentral()
+    }
+
+    // Configuration for annotation as Lombok
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
     }
 }
