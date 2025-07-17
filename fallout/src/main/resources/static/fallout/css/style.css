@@ -21,6 +21,11 @@ body {
     color: #000;
     text-shadow: none;
 }
+label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
 .container {
     padding: 20px;
     border: 2px solid #00ff00;
@@ -35,12 +40,12 @@ a {
     color: #00ff00;
     text-decoration: underline;
     font-weight: bold;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
 }
 a:hover {
     color: #00ff00;
     text-decoration: underline;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
 }
 .fallout-footer {
     text-align: center;
@@ -49,23 +54,18 @@ a:hover {
 
 /* Input */
 input, textarea {
-    background-color: #000;
-    color: #00ff00;
-    border: 1px solid #00ff00;
-    text-shadow: 0 0 2px #008800;
-}
-input[type="text"] {
     padding: 5px;
     font-family: 'Monofonto', monospace;
     color: #00ff00;
     background-color: #000;
     border: 1px solid #00ff00;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
+    box-shadow: 0 0 3px #008800;
 }
-input[type="text"]:focus {
+input:focus, textarea:focus {
     outline: none; /* elimina il bordo bianco del focus */
     color: #00ff00; /* mantiene il verde brillante */
-    text-shadow: 0 0 2px #008800; /* glow coerente con lo stile Pip-Boy */
+    text-shadow: 0 0 3px #008800; /* glow coerente con lo stile Pip-Boy */
     background-color: #000;
     border: 1px solid #00ff00;
 }
@@ -76,10 +76,78 @@ input[type="text"]:focus {
     padding: 5px;
     cursor: pointer;
     text-shadow: 0 0 3px #008800;
+    box-shadow: 0 0 3px #008800;
 }
 .button:hover {
     background-color: #00ff00;
     color: #000;
+}
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #000;
+    border: 1px solid #00ff00;
+    border-radius: 0;
+    box-shadow: 0 0 3px #008800;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+input[type="checkbox"]:checked::before {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ff00;
+    line-height: 1;
+}
+input[type="radio"] {
+    appearance: none;
+    background-color: #000;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 3px #008800;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    height: 75%;
+    background-color: #00ff00;
+    transform: translate(-50%, -50%);
+}
+input[type="file"] {
+    color: #00ff00;
+    background-color: #000;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 5px #008800;
+    padding: 8px;
+    font-family: 'Monofonto', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    text-shadow: 0 0 3px #008800;
+}
+input[type="file"]::-webkit-file-upload-button {
+    background-color: #000;
+    box-shadow: 0 0 3px #008800;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: 'Monofonto', monospace;
+    cursor: pointer;
+    text-shadow: 0 0 3px #008800;
+    transition: background 0.3s, transform 0.1s;
+}
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #00ff00;
+    color: #000;
+    text-shadow: 0 0 3px #008800;
 }
 
 /* Table */
@@ -88,10 +156,10 @@ table {
     border-collapse: collapse;
     background-color: #000;
     color: #00ff00;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
     font-family: 'Monofonto', monospace;
     border: 2px solid #00ff00;
-    box-shadow: 0 0 5px #008800;
+    box-shadow: 0 0 3px #008800;
 }
 thead {
     border-bottom: 2px solid #00ff00;
@@ -114,11 +182,11 @@ th, td {
 th {
     font-weight: bold;
     color: #00ff00;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
 }
 td {
     color: #00ff00;
-    text-shadow: 0 0 2px #008800;
+    text-shadow: 0 0 3px #008800;
 }
 
 /* Scanline and CRT Animation */
