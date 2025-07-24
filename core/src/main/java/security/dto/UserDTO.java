@@ -23,5 +23,5 @@ public class UserDTO {
             regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$",
             message = "La password deve contenere almeno una maiuscola, una minuscola, un numero e un simbolo"
     ) private final String plainPassword;
-    @NotNull private final UserRole role;
+    @NotNull private final UserRole role = UserRole.USER;
 }
