@@ -6,6 +6,7 @@ notes/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+database.sqlite3
 
 ### STS ###
 .apt_generated
