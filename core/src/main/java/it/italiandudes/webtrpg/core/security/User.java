@@ -1,6 +1,6 @@
-package security;
+package it.italiandudes.webtrpg.core.security;
 
-import audit.AuditableEntity;
+import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,8 +8,8 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import security.dto.UserDTO;
-import security.enums.UserRole;
+import it.italiandudes.webtrpg.core.security.dto.UserDTO;
+import it.italiandudes.webtrpg.core.security.enums.UserRole;
 
 import java.util.Objects;
 

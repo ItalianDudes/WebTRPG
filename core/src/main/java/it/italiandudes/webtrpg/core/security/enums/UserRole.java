@@ -1,4 +1,4 @@
-package security.enums;
+package it.italiandudes.webtrpg.core.security.enums;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;

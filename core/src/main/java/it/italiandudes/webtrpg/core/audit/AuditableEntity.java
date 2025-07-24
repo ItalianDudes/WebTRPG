@@ -1,4 +1,4 @@
-package audit;
+package it.italiandudes.webtrpg.core.audit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

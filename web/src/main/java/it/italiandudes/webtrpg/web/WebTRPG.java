@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan(basePackages = {
+        "it.italiandudes.webtrpg.core",
         "it.italiandudes.webtrpg.web",
         "it.italiandudes.webtrpg.fallout"
 })

@@ -1,4 +1,4 @@
-package security.dto;
+package it.italiandudes.webtrpg.core.security.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
-import security.enums.UserRole;
+import it.italiandudes.webtrpg.core.security.enums.UserRole;
 
 @Getter
 @AllArgsConstructor
