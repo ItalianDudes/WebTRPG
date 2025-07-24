@@ -1,0 +1,66 @@
+package security;
+
+import audit.AuditableEntity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import security.dto.UserDTO;
+import security.enums.UserRole;
+
+import java.util.Objects;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@ToString(exclude = "passwordHash")
+@NoArgsConstructor // Needed for JPA
+@SuppressWarnings("unused")
+public class User extends AuditableEntity {
+
+    // Attributes
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    @Column(unique = true, nullable = false) @NotBlank private String username;
+    @Column(unique = true, nullable = false) @NotBlank @Email(message = "Inserisci un indirizzo email valido") private String mail;
+    @Column(nullable = false) @NotBlank private String passwordHash;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0") @NotNull private UserRole role = UserRole.USER;
+
+    // Builder Constructor
+    @Builder
+    public User(@NotNull final String username, @NotNull final String mail, @NotNull final String passwordHash, @NotNull final UserRole role) {
+        this.username = username;
+        this.mail = mail;
+        this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
+    // FromDTO
+    public static User fromDTO(@NotNull final UserDTO dto, @NotNull final PasswordEncoder encoder) {
+        return User.builder()
+                .username(dto.getUsername())
+                .mail(dto.getMail())
+                .passwordHash(encoder.encode(dto.getPlainPassword()))
+                .role(dto.getRole())
+                .build();
+    }
+
+    // JPA Equals&HashCode
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        User user = (User) o;
+        return getId() != null && Objects.equals(getId(), user.getId());
+    }
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+}
