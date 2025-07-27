@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dnd5e/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <h1 style="text-align: center;">D&D5E-WebTRPG</h1>
+        <label>Tester Label <input type="text"/></label>
+        <label><input type="checkbox"/>CHECK</label><br/>
+        <label><input type="radio" name="selezione" value="1"/> Opzione 1</label><br/>
+        <label><input type="radio" name="selezione" value="2"/> Opzione 2</label><br/>
+        <label><input type="radio" name="selezione" value="3"/> Opzione 3</label><br/>
+        <input type="file"/>
+        <button type="button" class="button">PANINO</button>
+        <p>Benvenuto nel TRPG Fallout di WebTRPG!</p>
+        <p>Sparati uno psycho e poi sparati in un ginocchio!</p>
+        <table>
+            <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Nome</th>
+                <th>Rarità</th>
+                <th>Peso (KG)</th>
+                <th>Costo (MR)</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 10%;">
+                        <label><input type="checkbox" name="item_selected" value="1">1</label>
+                    </td>
+                    <td style="width: 70%;">Patata</td>
+                    <td>Comune</td>
+                    <td>1.5Kg</td>
+                    <td>4MR</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%;">
+                        <label><input type="checkbox" name="item_selected" value="2">2</label>
+                    </td>
+                    <td style="width: 70%;">Salsiccia</td>
+                    <td>Comune</td>
+                    <td>0.8Kg</td>
+                    <td>10MR</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%;">
+                        <label><input type="checkbox" name="item_selected" value="3">3</label>
+                    </td>
+                    <td style="width: 70%;">Mela</td>
+                    <td>Comune</td>
+                    <td>1Kg</td>
+                    <td>5MR</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%;">
+                        <label><input type="checkbox" name="item_selected" value="4">4</label>
+                    </td>
+                    <td style="width: 70%;">Carne di Bramino Radioattivo</td>
+                    <td>Comune</td>
+                    <td>3Kg</td>
+                    <td>12MR</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</html>

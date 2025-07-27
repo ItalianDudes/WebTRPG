@@ -4,10 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public final class ControllerWebIndex {
+public class ControllerLogin {
 
-    @GetMapping("/")
-    public String index() {
-        return "web/index";
+    // Methods
+    @GetMapping("/login")
+    public String formLogin() {
+        return "/web/login";
     }
 }

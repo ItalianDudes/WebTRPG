@@ -1,8 +1,3 @@
-plugins {
-    id 'org.springframework.boot' version '3.5.3'
-    id 'io.spring.dependency-management' version '1.1.7'
-}
-
 // Versioning
 def versionNumber = '0.0'
 def versionType = 'DEV' // RELEASE | BETA | ALPHA | DEV
@@ -10,18 +5,15 @@ def versionMarker = versionType.charAt(0)
 version = versionNumber+versionMarker
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security' // Only when starting login-phase
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
+
+    // Database
+    implementation 'org.xerial:sqlite-jdbc:3.50.3.0' // SQLITE
+    implementation 'org.hibernate.orm:hibernate-community-dialects:7.0.7.Final'
     implementation 'org.liquibase:liquibase-core'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // Only when starting login-phase
-    compileOnly 'org.projectlombok:lombok'
+
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test' // Only when starting login-phase
 }

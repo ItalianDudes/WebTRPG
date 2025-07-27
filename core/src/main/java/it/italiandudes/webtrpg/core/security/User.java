@@ -1,14 +1,12 @@
 package it.italiandudes.webtrpg.core.security;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
+import it.italiandudes.webtrpg.core.security.dto.RegisterDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import it.italiandudes.webtrpg.core.security.dto.UserDTO;
 import it.italiandudes.webtrpg.core.security.enums.UserRole;
 
 import java.util.Objects;
@@ -24,10 +22,10 @@ public class User extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @Column(unique = true, nullable = false) @NotBlank private String username;
-    @Column(unique = true, nullable = false) @NotBlank @Email(message = "Inserisci un indirizzo email valido") private String mail;
-    @Column(nullable = false) @NotBlank private String passwordHash;
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0") @NotNull private UserRole role = UserRole.USER;
+    @Column(unique = true, nullable = false) private String username;
+    @Column(unique = true, nullable = false) private String mail;
+    @Column(nullable = false) private String passwordHash;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0") private UserRole role = UserRole.USER;
 
     // Builder Constructor
     @Builder
@@ -39,12 +37,12 @@ public class User extends AuditableEntity {
     }
 
     // FromDTO
-    public static User fromDTO(@NotNull final UserDTO dto, @NotNull final PasswordEncoder encoder) {
+    public static User fromRegisterDTO(@NotNull final RegisterDTO dto, @NotNull final PasswordEncoder encoder) {
         return User.builder()
                 .username(dto.getUsername())
                 .mail(dto.getMail())
                 .passwordHash(encoder.encode(dto.getPlainPassword()))
-                .role(dto.getRole())
+                .role(UserRole.USER)
                 .build();
     }
 

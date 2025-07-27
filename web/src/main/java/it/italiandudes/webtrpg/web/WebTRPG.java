@@ -2,15 +2,15 @@ package it.italiandudes.webtrpg.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@ComponentScan(basePackages = {
-        "it.italiandudes.webtrpg.core",
-        "it.italiandudes.webtrpg.web",
-        "it.italiandudes.webtrpg.fallout"
-})
+@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
+@EntityScan(basePackages = "it.italiandudes.webtrpg")
+@ComponentScan(basePackages = "it.italiandudes.webtrpg")
+@EnableJpaRepositories(basePackages = "it.italiandudes.webtrpg")
 public class WebTRPG {
 
     // Spring Application Starter

@@ -1,2 +1,2 @@
 rootProject.name = 'WebTRPG'
-include 'core', 'web', 'fallout'
+include 'core', 'web', 'dnd5e', 'fallout'

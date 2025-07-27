@@ -1,13 +1,13 @@
-package it.italiandudes.webtrpg.fallout.controller;
+package it.italiandudes.webtrpg.dnd5e.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ControllerFalloutCSSTest {
+public class ControllerDND5ECSSTest {
 
-    @GetMapping("/fallout/css_test")
+    @GetMapping("/dnd5e/css_test")
     private String css_test() {
-        return "fallout/css_test";
+        return "dnd5e/css_test";
     }
 }

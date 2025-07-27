@@ -1,8 +1,3 @@
-plugins {
-    id 'org.springframework.boot' version '3.5.3'
-    id 'io.spring.dependency-management' version '1.1.7'
-}
-
 // Versioning
 def versionNumber = '0.0'
 def versionType = 'DEV' // RELEASE | BETA | ALPHA | DEV
@@ -11,23 +6,24 @@ version = versionNumber+versionMarker
 
 // Dependencies
 dependencies {
+    // Modules
     implementation project(':core')
+    implementation project(':dnd5e')
     implementation project(':fallout')
+
+    // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // implementation 'org.springframework.boot:spring-boot-starter-security' // Only when starting login-phase
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
-    implementation 'org.liquibase:liquibase-core'
-    // implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // Only when starting login-phase
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // testImplementation 'org.springframework.security:spring-security-test' // Only when starting login-phase
+
+    // Thymeleaf
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
+
+    // DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 // Disabling default jar [use bootJar]
@@ -38,6 +34,7 @@ jar {
 // Specify to directly use sourceSets istead of copying it in 'build' during bootRun (useful to live-edit resources)
 bootRun {
     sourceResources sourceSets.main
+    classpath += files(project(":dnd5e").file("src/main/resources"))
     classpath += files(project(":fallout").file("src/main/resources"))
 }
 
