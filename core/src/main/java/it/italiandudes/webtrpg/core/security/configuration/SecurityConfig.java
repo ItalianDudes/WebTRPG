@@ -29,8 +29,10 @@ public class SecurityConfig {
                                 "/register",
                                 "/web/css/**",
                                 "/favicon.ico",
-                                "/**/*.css", // Da rimuovere prima della release
-                                "/**/css_test" // Da rimuovere prima della release
+                                "/dnd5e/css/**", // Da rimuovere prima della release
+                                "/dnd5e/css_test", // Da rimuovere prima della release
+                                "/fallout/css/**", // Da rimuovere prima della release
+                                "/fallout/css_test" // Da rimuovere prima della release
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
