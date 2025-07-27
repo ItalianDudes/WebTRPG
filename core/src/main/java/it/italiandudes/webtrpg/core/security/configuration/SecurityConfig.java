@@ -23,7 +23,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(@NotNull final HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login","/register", "/web/css/**", "/favicon.ico", "/dnd5e/css_test", "/fallout/css_test").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/login",
+                                "/register",
+                                "/web/css/**",
+                                "/favicon.ico",
+                                "/**/*.css", // Da rimuovere prima della release
+                                "/**/css_test" // Da rimuovere prima della release
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
