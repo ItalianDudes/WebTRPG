@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{web/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <h1 style="text-align: center;">PROFILO</h1>
+        <p th:text="${user.getUsername()}">NOME UTENTE</p><br/>
+        <p th:text="${user.getMail()}">MAIL</p><br/>
+        <p th:text="${user.getRole()}">RUOLO</p><br/>
+    </div>
+</html>
