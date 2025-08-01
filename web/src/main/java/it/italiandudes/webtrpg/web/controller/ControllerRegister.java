@@ -34,6 +34,7 @@ public class ControllerRegister {
             model.addAttribute("errors", result.getAllErrors());
             return "web/register";
         }
+        dto.setMail(dto.getMail().trim().toLowerCase());
         if (webTRPGUserDetailsService.register(dto)) {
             return "redirect:/login";
         } else {

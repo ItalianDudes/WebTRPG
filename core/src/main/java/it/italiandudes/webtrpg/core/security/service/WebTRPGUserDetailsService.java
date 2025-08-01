@@ -27,7 +27,7 @@ public final class WebTRPGUserDetailsService implements UserDetailsService {
     // Methods
     @Override
     public UserDetails loadUserByUsername(@NotNull final String mail) throws UsernameNotFoundException {
-        User user = userRepository.findByMail(mail).orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+        User user = userRepository.findByMail(mail.trim().toLowerCase()).orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
         return new WebTRPGUserDetails(user);
     }
     public boolean register(@NotNull RegisterDTO dto) {
