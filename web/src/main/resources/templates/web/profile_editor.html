@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{web/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <h1 style="text-align: center;">EDITOR PROFILO</h1>
+        <form th:object="${editorDTO}" th:action="@{/profile/edit}" method="post">
+            <label>Nuovo Nome Utente <input th:field="*{username}" type="text" placeholder="Nuovo Nome Utente"/></label><br/>
+            <label>Nuova Password <input th:field="*{plainPassword}" type="password" placeholder="Nuova Password"/></label><br/>
+            <label>Conferma Password <input th:field="*{plainConfirmPassword}" type="password" placeholder="Conferma Password"></label><br/>
+            <button type="submit">SALVA</button><br/>
+            <div th:if="${#fields.hasAnyErrors()}">
+                <p>ERRORE:</p>
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+                </ul>
+            </div>
+        </form>
+    </div>
+</html>

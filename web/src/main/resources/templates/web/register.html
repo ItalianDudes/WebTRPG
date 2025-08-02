@@ -9,9 +9,12 @@
             <label>Email <input th:field="*{mail}" type="email" placeholder="Email" required/></label><br/>
             <label>Password <input th:field="*{plainPassword}" type="password" placeholder="Password" required/></label><br/>
             <button type="submit">Login</button><br/>
-            <p th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></p><br/>
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p><br/>
-            <p th:if="${#fields.hasErrors('plainPassword')}" th:errors="*{plainPassword}"></p><br/>
+            <div th:if="${#fields.hasAnyErrors()}">
+                <p>ERRORE:</p>
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+                </ul>
+            </div>
         </form>
         <p>Hai già un utente registrato? Clicca <a href="/login">qui</a>.</p>
     </div>

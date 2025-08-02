@@ -9,4 +9,7 @@
         <p th:text="${user.getMail()}">MAIL</p><br/>
         <p th:text="${user.getRole()}">RUOLO</p><br/>
     </div>
+    <form action="/logout" method="post">
+        <button type="submit">LOGOUT</button>
+    </form>
 </html>
