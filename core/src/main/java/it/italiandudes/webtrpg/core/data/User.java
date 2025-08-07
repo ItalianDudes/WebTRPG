@@ -1,4 +1,4 @@
-package it.italiandudes.webtrpg.core.security;
+package it.italiandudes.webtrpg.core.data;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.security.dto.RegisterDTO;
