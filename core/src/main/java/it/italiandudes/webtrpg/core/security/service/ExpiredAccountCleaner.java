@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ExpiredAccountCleaner {
+public final class ExpiredAccountCleaner {
 
     // Attributes
     @NotNull private final SessionRegistry sessionRegistry;

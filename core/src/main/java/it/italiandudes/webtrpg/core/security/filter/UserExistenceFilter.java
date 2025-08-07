@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class UserExistenceFilter extends OncePerRequestFilter {
+public final class UserExistenceFilter extends OncePerRequestFilter {
 
     // Attributes
     @NotNull private final UserRepository userRepository;

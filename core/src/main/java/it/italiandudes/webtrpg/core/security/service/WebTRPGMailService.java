@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Service
-public class WebTRPGMailService {
+public final class WebTRPGMailService {
 
     // Attributes
     @NotNull private final JavaMailSender MAIL_SENDER;
@@ -30,7 +30,7 @@ public class WebTRPGMailService {
 
     // Methods
     public void sendConfirmationVerificationMail(@NotNull final String targetMail) throws MessagingException {
-        String mailContent = "<h1>Benvenuto in WebTRPG!</h1><p>La mail è stata verificata con successo!</p>";
+        String mailContent = "<h1>Welcome to WebTRPG!</h1><p>You're mail has been successfully verified!</p>";
         sendMail(targetMail, VERIFY_SUBJECT, mailContent, true);
     }
     public void sendVerificationMail(@NotNull final String targetMail, @NotNull final String token) throws MessagingException {
