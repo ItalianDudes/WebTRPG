@@ -1,7 +1,10 @@
 package it.italiandudes.webtrpg.web.controller;
 
+import it.italiandudes.webtrpg.core.data.VerificationToken;
 import it.italiandudes.webtrpg.core.security.WebTRPGUserDetails;
 import it.italiandudes.webtrpg.core.security.dto.UserDataEditorDTO;
+import it.italiandudes.webtrpg.core.security.enums.VerificationTokenType;
+import it.italiandudes.webtrpg.core.security.repository.VerificationTokenRepository;
 import it.italiandudes.webtrpg.core.security.service.WebTRPGUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,16 +21,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class ControllerWebProfile {
 
     // Attributes
-    @NotNull
-    private final WebTRPGUserDetailsService webTRPGUserDetailsService;
+    @NotNull private final WebTRPGUserDetailsService webTRPGUserDetailsService;
+    @NotNull private final VerificationTokenRepository verificationTokenRepository;
 
     // Constructors
-    public ControllerWebProfile(@NotNull final WebTRPGUserDetailsService webTRPGUserDetailsService) {
+    public ControllerWebProfile(@NotNull final WebTRPGUserDetailsService webTRPGUserDetailsService, @NotNull final VerificationTokenRepository verificationTokenRepository) {
         this.webTRPGUserDetailsService = webTRPGUserDetailsService;
+        this.verificationTokenRepository = verificationTokenRepository;
     }
 
     // Profile Methods
@@ -35,6 +41,11 @@ public class ControllerWebProfile {
     public String profile(@AuthenticationPrincipal WebTRPGUserDetails userDetails, Model model) {
         assert userDetails != null; // Page protected
         model.addAttribute("user", userDetails.getUser());
+        Optional<VerificationToken> optVerificationToken = verificationTokenRepository.findByUserAndType(userDetails.getUser(), VerificationTokenType.EMAIL_VERIFICATION);
+        if (optVerificationToken.isPresent()) {
+            VerificationToken verificationToken = optVerificationToken.get();
+            model.addAttribute("mailVerified", verificationToken.isVerified());
+        } else model.addAttribute("mailVerified", false);
         return "web/profile";
     }
 

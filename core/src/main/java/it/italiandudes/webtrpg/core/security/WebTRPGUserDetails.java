@@ -1,5 +1,6 @@
 package it.italiandudes.webtrpg.core.security;
 
+import it.italiandudes.webtrpg.core.data.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

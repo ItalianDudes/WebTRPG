@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
 @EntityScan(basePackages = "it.italiandudes.webtrpg")
 @ComponentScan(basePackages = "it.italiandudes.webtrpg")
 @EnableJpaRepositories(basePackages = "it.italiandudes.webtrpg")
+@EnableScheduling
 public class WebTRPG {
 
     // Spring Application Starter

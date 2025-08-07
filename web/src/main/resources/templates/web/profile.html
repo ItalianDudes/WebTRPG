@@ -8,6 +8,7 @@
         <p th:text="${user.getUsername()}">NOME UTENTE</p><br/>
         <p th:text="${user.getMail()}">MAIL</p><br/>
         <p th:text="${user.getRole()}">RUOLO</p><br/>
+        <p th:text="${mailVerified}">VERIFICATO</p>
     </div>
     <form action="/logout" method="post">
         <button type="submit">LOGOUT</button>

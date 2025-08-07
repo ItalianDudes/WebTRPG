@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.web.controller;
 
 import it.italiandudes.webtrpg.core.security.dto.RegisterDTO;
 import it.italiandudes.webtrpg.core.security.service.WebTRPGUserDetailsService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -43,7 +44,7 @@ public class ControllerRegister {
         return "web/register";
     }
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("registerDTO") RegisterDTO dto, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String register(@Valid @ModelAttribute("registerDTO") RegisterDTO dto, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) throws MessagingException {
         if (result.hasErrors()) {
             model.addAttribute("errors", result.getAllErrors());
             return "web/register";
