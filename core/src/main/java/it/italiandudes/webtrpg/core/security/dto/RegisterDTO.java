@@ -17,7 +17,7 @@ public final class RegisterDTO {
     @NotNull @NotBlank(message = "Username obbligatorio") @Size(min = 4, message = "Lo username deve essere contenere almeno 4 caratteri") private String username;
     @NotNull @NotBlank(message = "Email obbligatoria") @Email(message = "Formato email non valido") private String mail;
     @NotNull @NotBlank(message = "Password obbligatoria") @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$",
+            regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
             message = "La password deve contenere di almeno 8 caratteri, almeno una maiuscola, una minuscola, un numero e un simbolo"
     ) private String plainPassword;
 }
