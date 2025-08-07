@@ -32,7 +32,7 @@ public class ExpiredAccountCleaner {
     }
 
     // Methods
-    @Scheduled(cron = "0 * * * * *") // Ogni minuto
+    @Scheduled(cron = "0 0 3 * * *") // Every day at 3:00
     public void cleanExpiredUnverifiedAccounts() {
         List<VerificationToken> expiredTokens = verificationTokenRepository.findByIsVerifiedFalseAndExpiryDateBefore(LocalDateTime.now())
                 .stream().filter(verificationToken -> verificationToken.getType() == VerificationTokenType.EMAIL_VERIFICATION).toList();
