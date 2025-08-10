@@ -18,7 +18,7 @@ public final class UserDataEditorDTO {
             message = "Lo username, se da cambiare, deve essere lungo almeno 4 caratteri."
     ) private String username;
     @Pattern(
-            regexp = "^$|^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$",
+            regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
             message = "La password, se da cambiare, deve contenere di almeno 8 caratteri, almeno una maiuscola, una minuscola, un numero e un simbolo."
     ) private String plainPassword;
     private String plainConfirmPassword;
