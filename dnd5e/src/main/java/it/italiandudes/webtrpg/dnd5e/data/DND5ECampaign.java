@@ -5,7 +5,6 @@ import it.italiandudes.webtrpg.core.data.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
-import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.Nullable;
 

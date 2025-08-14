@@ -2,7 +2,6 @@ package it.italiandudes.webtrpg.dnd5e.repository;
 
 import it.italiandudes.webtrpg.core.data.User;
 import it.italiandudes.webtrpg.dnd5e.data.DND5ECampaign;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
