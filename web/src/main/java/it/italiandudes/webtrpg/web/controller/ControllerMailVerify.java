@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.Optional;
 
 @Controller
-public class ControllerMailVerify {
+public final class ControllerMailVerify {
 
     // Attributes
     @NotNull private final VerificationTokenRepository verificationTokenRepository;

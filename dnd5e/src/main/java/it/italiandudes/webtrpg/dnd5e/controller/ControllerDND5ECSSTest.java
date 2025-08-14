@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ControllerDND5ECSSTest {
+public final class ControllerDND5ECSSTest {
 
     @GetMapping("/dnd5e/css_test")
     private String css_test() {

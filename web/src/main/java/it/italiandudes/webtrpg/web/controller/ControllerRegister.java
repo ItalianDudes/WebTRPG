@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class ControllerRegister {
+public final class ControllerRegister {
 
     // Attributes
     @NotNull private final AuthenticationManager authenticationManager;

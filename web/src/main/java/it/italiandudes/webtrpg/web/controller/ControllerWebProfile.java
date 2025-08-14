@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Optional;
 
 @Controller
-public class ControllerWebProfile {
+public final class ControllerWebProfile {
 
     // Attributes
     @NotNull private final WebTRPGUserDetailsService webTRPGUserDetailsService;
