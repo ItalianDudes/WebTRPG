@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass @SuppressWarnings("unused")
 public abstract class AuditableEntity {
-    @Column(updatable = false) @CreationTimestamp protected LocalDateTime createdAt;
-    @Column @UpdateTimestamp protected LocalDateTime updatedAt;
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP") @CreationTimestamp protected LocalDateTime createdAt;
+    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP") @UpdateTimestamp protected LocalDateTime updatedAt;
 }
