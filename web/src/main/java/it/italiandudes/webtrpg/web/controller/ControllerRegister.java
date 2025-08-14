@@ -50,7 +50,17 @@ public class ControllerRegister {
             return "web/register";
         }
 
+        if (!dto.getConfirmPlainPassword().equals(dto.getPlainPassword())) {
+            result.reject("password-mismatch", "La conferma della password deve essere uguale alla password");
+            return "web/register";
+        }
+
         dto.setMail(dto.getMail().trim().toLowerCase()); // Mail Trim And Lowercasing
+        if (dto.getUsername().trim().toLowerCase().equalsIgnoreCase(dto.getMail())) {
+            result.reject("username-equals-mail", "Lo username non deve essere uguale alla mail.");
+            return "web/register";
+        }
+
         if (webTRPGUserDetailsService.register(dto)) { // Successful register?
             try { // Auto-Login Attempt
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(dto.getMail(), dto.getPlainPassword());

@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public final class RegisterDTO {
 
     // Attributes
@@ -20,4 +21,8 @@ public final class RegisterDTO {
             regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
             message = "La password deve contenere di almeno 8 caratteri, almeno una maiuscola, una minuscola, un numero e un simbolo"
     ) private String plainPassword;
+    @NotNull @NotBlank(message = "Conferma Password obbligatoria") @Pattern(
+            regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
+            message = "La conferma della password deve contenere di almeno 8 caratteri, almeno una maiuscola, una minuscola, un numero e un simbolo e deve essere uguale alla password"
+    ) private String confirmPlainPassword;
 }

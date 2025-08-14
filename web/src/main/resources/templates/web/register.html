@@ -8,6 +8,7 @@
             <label>Username <input th:field="*{username}" type="text" placeholder="Username" required/></label><br/>
             <label>Email <input th:field="*{mail}" type="email" placeholder="Email" required/></label><br/>
             <label>Password <input th:field="*{plainPassword}" type="password" placeholder="Password" required/></label><br/>
+            <label>Conferma Password <input th:field="*{confirmPlainPassword}" type="password" placeholder="Conferma Password" required/></label><br/>
             <button type="submit">Login</button><br/>
             <div th:if="${#fields.hasAnyErrors()}">
                 <p>ERRORE:</p>
