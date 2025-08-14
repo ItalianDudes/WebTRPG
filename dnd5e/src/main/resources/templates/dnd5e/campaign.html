@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dnd5e/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <div style="text-align: center;" th:if="${campaign == null}">
+            <p>CAMPAGNA NON TROVATA</p>
+            <p><a href="/dnd5e/campaigns">MENU PRINCIPALE</a></p>
+        </div>
+        <div th:if="${campaign != null}">
+            <h1 style="text-align: center;" th:text="${campaign.name}"></h1>
+            <p style="text-align: center;" th:text="${campaign.description}"></p>
+            <p th:text="@{'Dungeon Master: ' + ${campaign.dungeonMaster.getUsername()}}"></p>
+            <p th:text="@{'Massimo Giocatori: ' + ${campaign.maxPlayers}}"></p>
+        </div>
+    </div>
+</html>

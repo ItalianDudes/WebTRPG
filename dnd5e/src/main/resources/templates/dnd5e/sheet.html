@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dnd5e/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <div style="text-align: center;" th:if="${sheet == null}">
+            <p>SCHEDA NON TROVATA</p>
+            <p><a href="/dnd5e/sheets">MENU PRINCIPALE</a></p>
+        </div>
+        <div th:if="${sheet != null}">
+            <p th:text="@{${sheet.characterName} + ' - ' + ${sheet.level}}"></p>
+        </div>
+    </div>
+</html>

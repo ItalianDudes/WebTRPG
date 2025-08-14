@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dnd5e/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <p>Campagne Disponibili:</p>
+        <ul>
+            <th:block th:each="campaign : ${campaigns}">
+                <li><a th:text="${campaign.name}" th:href="@{'/dnd5e/campaigns/' + ${campaign.id}}"></a></li>
+            </th:block>
+        </ul>
+    </div>
+</html>

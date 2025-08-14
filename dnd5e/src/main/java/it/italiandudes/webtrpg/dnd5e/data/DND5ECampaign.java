@@ -16,14 +16,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
-@Check(constraints = "maxPlayers >= 2")
+// @Check(constraints = "maxPlayers >= 2")
 public class DND5ECampaign extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id") private User dungeonMaster;
     @Column private String name;
-    @Min(2) private int maxPlayers = 2; // DM Included
+    @Column @Min(2) private int maxPlayers = 2; // DM Included
     @Column private String description;
 
 

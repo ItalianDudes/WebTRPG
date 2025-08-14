@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dnd5e/_base}"
+      lang="it">
+    <div layout:fragment="content">
+        <div style="text-align: center;" th:if="${campaign == null}">
+            <p>CAMPAGNA NON TROVATA</p>
+            <p><a href="/dnd5e/campaigns">MENU PRINCIPALE</a></p>
+        </div>
+        <div style="text-align: center;" th:if="${campaign != null && (sheets == null || sheets.isEmpty())}">
+            <p>NESSUNA SCHEDA TROVATA</p>
+            <p><a th:href="@{'/dnd5e/campaigns/' + ${campaign.id}}">MENU PRINCIPALE</a></p>
+        </div>
+        <div th:if="${campaign != null && sheets != null}">
+            <p>SCHEDE DISPONIBILI:</p>
+            <ul>
+                <th:block th:each="sheet : ${sheets}">
+                    <li><a th:text="@{${sheet.characterName} + '-' + ${sheet.level}}" th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets/' + ${sheet.id}}"></a></li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</html>
