@@ -6,7 +6,8 @@
     <div layout:fragment="content">
         <div style="text-align: center;" th:if="${sheet == null}">
             <p>SCHEDA NON TROVATA</p>
-            <p><a href="/dnd5e/sheets">MENU PRINCIPALE</a></p>
+            <p style="text-align: center"><a th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets'}">TORNA ALLA LISTA SCHEDE</a></p>
+            <p style="text-align: center"><a href="/dnd5e/campaigns">TORNA ALLA LISTA CAMPAGNE</a></p>
         </div>
         <div th:if="${sheet != null}">
             <p th:text="@{${sheet.characterName} + ' - ' + ${sheet.level}}"></p>

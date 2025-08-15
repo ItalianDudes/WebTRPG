@@ -28,8 +28,8 @@ public final class ControllerDND5ECampaigns {
         return "dnd5e/campaigns-list";
     }
 
-    @GetMapping("/dnd5e/campaigns/{id}")
-    private String selectedCampaign(@PathVariable(name = "id") Long id, Model model) {
+    @GetMapping("/dnd5e/campaigns/{campaign-id}")
+    private String selectedCampaign(@PathVariable(name = "campaign-id") Long id, Model model) {
         Optional<DND5ECampaign> optCampaign = campaignRepository.findById(id);
         optCampaign.ifPresent(campaign -> model.addAttribute("campaign", campaign));
         return "dnd5e/campaign";

@@ -6,11 +6,9 @@
     <div layout:fragment="content">
         <div style="text-align: center;" th:if="${campaign == null}">
             <p>CAMPAGNA NON TROVATA</p>
-            <p><a href="/dnd5e/campaigns">MENU PRINCIPALE</a></p>
         </div>
         <div style="text-align: center;" th:if="${campaign != null && (sheets == null || sheets.isEmpty())}">
             <p>NESSUNA SCHEDA TROVATA</p>
-            <p><a th:href="@{'/dnd5e/campaigns/' + ${campaign.id}}">MENU PRINCIPALE</a></p>
         </div>
         <div th:if="${campaign != null && sheets != null}">
             <p>SCHEDE DISPONIBILI:</p>
@@ -20,5 +18,6 @@
                 </th:block>
             </ul>
         </div>
+        <p style="text-align: center"><a href="/dnd5e/campaigns">TORNA ALLA LISTA CAMPAGNE</a></p>
     </div>
 </html>

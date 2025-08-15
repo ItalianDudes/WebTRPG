@@ -6,13 +6,14 @@
     <div layout:fragment="content">
         <div style="text-align: center;" th:if="${campaign == null}">
             <p>CAMPAGNA NON TROVATA</p>
-            <p><a href="/dnd5e/campaigns">MENU PRINCIPALE</a></p>
         </div>
         <div th:if="${campaign != null}">
             <h1 style="text-align: center;" th:text="${campaign.name}"></h1>
             <p style="text-align: center;" th:text="${campaign.description}"></p>
             <p th:text="@{'Dungeon Master: ' + ${campaign.dungeonMaster.getUsername()}}"></p>
             <p th:text="@{'Massimo Giocatori: ' + ${campaign.maxPlayers}}"></p>
+            <p><a th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets'}">ACCEDI ALLE SCHEDE</a></p>
         </div>
+        <p style="text-align: center"><a href="/dnd5e/campaigns">TORNA ALLA LISTA CAMPAGNE</a></p>
     </div>
 </html>

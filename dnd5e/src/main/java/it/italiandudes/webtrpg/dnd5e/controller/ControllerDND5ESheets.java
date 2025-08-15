@@ -28,8 +28,8 @@ public final class ControllerDND5ESheets {
     }
 
     // Mappings
-    @GetMapping("/dnd5e/campaigns/{campaignID}/sheets")
-    private String sheets(@PathVariable(name = "campaignID") Long campaignID, @AuthenticationPrincipal WebTRPGUserDetails userDetails, Model model) {
+    @GetMapping("/dnd5e/campaigns/{campaign-id}/sheets")
+    private String sheets(@PathVariable(name = "campaign-id") Long campaignID, @AuthenticationPrincipal WebTRPGUserDetails userDetails, Model model) {
         Optional<DND5ECampaign> optCampaign = campaignRepository.findById(campaignID);
         optCampaign.ifPresent(campaign -> {
             model.addAttribute("campaign", campaign);
@@ -38,8 +38,8 @@ public final class ControllerDND5ESheets {
         return "dnd5e/sheets-list";
     }
 
-    @GetMapping("/dnd5e/campaigns/{campaignID}/sheets/{sheetID}")
-    private String selectedSheet(@PathVariable(name = "campaignID") Long campaignID, @PathVariable(name = "sheetID") Long sheetID, Model model) {
+    @GetMapping("/dnd5e/campaigns/{campaign-id}/sheets/{sheet-id}")
+    private String selectedSheet(@PathVariable(name = "campaign-id") Long campaignID, @PathVariable(name = "sheet-id") Long sheetID, Model model) {
         Optional<DND5ECampaign> optCampaign = campaignRepository.findById(campaignID);
         if (optCampaign.isPresent()) {
             model.addAttribute("campaign", optCampaign.get());
