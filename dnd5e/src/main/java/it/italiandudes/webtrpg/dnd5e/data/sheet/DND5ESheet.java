@@ -20,7 +20,7 @@ public class DND5ESheet extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "owner_id", nullable = false) private User owner;
     @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "campaign_id", nullable = false) private DND5ECampaign campaign;
-    @Column(columnDefinition = "INTEGER DEFAULT 0", nullable = false) private boolean isDead = false;
+    @Column(name = "is_dead", columnDefinition = "INTEGER DEFAULT 0", nullable = false) private boolean isDead = false;
 
     // Tabs
     @OneToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "tab_character_id", nullable = false, updatable = false) private DND5ESheetTabCharacter tabCharacter;

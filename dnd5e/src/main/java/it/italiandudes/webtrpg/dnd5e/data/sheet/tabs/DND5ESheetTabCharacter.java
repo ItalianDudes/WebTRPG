@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Entity
 @Table(name = "dnd5e_tab_characters")
-@Check(constraints = "level >= 1 AND exp >= 0 AND maxHP >= 1 AND currentHP <= maxHP AND tempHP >= 0 AND lifeDiceFaces >= 1 AND lifeDiceTotalAmount >= 1 AND lifeDiceCurrentAmount >= 0 AND proficiencyBonus >= 0 AND inspirationPoints >= 0")
+@Check(constraints = "level >= 1 AND exp >= 0 AND max_hp >= 1 AND current_hp <= max_hp AND temp_hp >= 0 AND life_dice_faces >= 1 AND life_dice_total_amount >= 1 AND life_dice_current_amount >= 0 AND proficiency_bonus >= 0 AND inspiration_points >= 0")
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
@@ -22,38 +22,38 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
 
     // Sheet Header
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @Column private String characterName;
-    @Min(1) @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 1") private int level = 1;
-    @Column private String characterClass;
-    @Column private String background;
-    @Column private String race;
-    @Column private String alignment;
-    @Min(0) @Column(columnDefinition = "INTEGER DEFAULT 0") private int exp = 0;
+    @Column(name = "character_name") private String characterName;
+    @Min(1) @Column(nullable = false, name = "level", columnDefinition = "INTEGER DEFAULT 1") private int level = 1;
+    @Column(name = "character_class") private String characterClass;
+    @Column(name = "background") private String background;
+    @Column(name = "race") private String race;
+    @Column(name = "alignment") private String alignment;
+    @Min(0) @Column(name = "exp", columnDefinition = "INTEGER DEFAULT 0") private int exp = 0;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage;
 
     // Life
     @Min(1) private int calculatedMaxHP;
-    @Min(1) @Column(columnDefinition = "INTEGER DEFAULT 20") private int maxHP = 20;
-    @Column(columnDefinition = "INTEGER DEFAULT 20") private int currentHP = 20;
-    @Min(0) @Column(columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
-    @Min(1) @Column(columnDefinition = "INTEGER DEFAULT 20") private int lifeDiceFaces = 20;
-    @Min(1) @Column(columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceTotalAmount = 1;
-    @Min(0) @Column(columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceCurrentAmount = 1;
+    @Min(1) @Column(name = "max_hp", columnDefinition = "INTEGER DEFAULT 20") private int maxHP = 20;
+    @Column(name = "current_hp", columnDefinition = "INTEGER DEFAULT 20") private int currentHP = 20;
+    @Min(0) @Column(name = "temp_hp", columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
+    @Min(1) @Column(name = "life_dice_faces", columnDefinition = "INTEGER DEFAULT 20") private int lifeDiceFaces = 20;
+    @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceTotalAmount = 1;
+    @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceCurrentAmount = 1;
 
     // Proficiency Bonus and Secondary Stats
-    @Min(0) @Column(columnDefinition = "INTEGER DEFAULT 2") private int proficiencyBonus = 2;
-    @Column private String speed;
-    @Min(0) @Column(columnDefinition = "INTEGER DEFAULT 0") private int inspirationPoints = 0;
+    @Min(0) @Column(name = "proficiency_bonus", columnDefinition = "INTEGER DEFAULT 2") private int proficiencyBonus = 2;
+    @Column(name = "speed") private String speed;
+    @Min(0) @Column(name = "inspiration_points", columnDefinition = "INTEGER DEFAULT 0") private int inspirationPoints = 0;
 
     // ST Against Death
-    @Min(0) @Max(3) @Column(columnDefinition = "INTEGER DEFAULT 0") private int successDeathST = 0;
-    @Min(0) @Max(3) @Column(columnDefinition = "INTEGER DEFAULT 0") private int failDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "success_death_st", columnDefinition = "INTEGER DEFAULT 0") private int successDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "fail_death_st", columnDefinition = "INTEGER DEFAULT 0") private int failDeathST = 0;
 
     // Character Info
-    @Column private String personalTraits;
-    @Column private String bonds;
-    @Column private String ideals;
-    @Column private String flaws;
+    @Column(name = "personal_traits") private String personalTraits;
+    @Column(name = "bonds") private String bonds;
+    @Column(name = "ideals") private String ideals;
+    @Column(name = "flaws") private String flaws;
 
     // Constructor
     @Builder
