@@ -3,8 +3,8 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +18,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "dnd5e_tab_characters")
-@Check(constraints = "level >= 1 AND exp >= 0 AND max_hp >= 1 AND current_hp <= max_hp AND temp_hp >= 0 AND life_dice_faces >= 1 AND life_dice_total_amount >= 1 AND life_dice_current_amount >= 0 AND proficiency_bonus >= 0 AND inspiration_points >= 0")
+@Check(constraints = "level >= 1 AND exp >= 0 AND max_hp >= 1 AND current_hp <= max_hp AND life_dice_faces >= 1 AND life_dice_total_amount >= 1 AND life_dice_current_amount >= 0 AND proficiency_bonus >= 0 AND inspiration_points >= 0")
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
 public class DND5ESheetTabCharacter extends AuditableEntity {
 
-    // Sheet Header
+    // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+
+    // Sheet Header
     @Column(name = "character_name") private String characterName;
     @Min(1) @Column(nullable = false, name = "level", columnDefinition = "INTEGER DEFAULT 1") private int level = 1;
     @Column(name = "character_class") private String characterClass;
@@ -39,7 +41,7 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     @Min(1) @Transient private int calculatedMaxHP;
     @Min(1) @Column(name = "max_hp", columnDefinition = "INTEGER DEFAULT 20") private int maxHP = 20;
     @Column(name = "current_hp", columnDefinition = "INTEGER DEFAULT 20") private int currentHP = 20;
-    @Min(0) @Column(name = "temp_hp", columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
+    @Column(name = "temp_hp", columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
     @Min(1) @Column(name = "life_dice_faces", columnDefinition = "INTEGER DEFAULT 20") private int lifeDiceFaces = 20;
     @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceTotalAmount = 1;
     @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceCurrentAmount = 1;
@@ -50,8 +52,8 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     @Min(0) @Column(name = "inspiration_points", columnDefinition = "INTEGER DEFAULT 0") private int inspirationPoints = 0;
 
     // ST Against Death
-    @Min(0) @Max(3) @Column(name = "success_death_st", columnDefinition = "INTEGER DEFAULT 0") private int successDeathST = 0;
-    @Min(0) @Max(3) @Column(name = "fail_death_st", columnDefinition = "INTEGER DEFAULT 0") private int failDeathST = 0;
+    @Size(max = 3) @Column(name = "success_death_st", columnDefinition = "INTEGER DEFAULT 0") private int successDeathST = 0;
+    @Size(max = 3) @Column(name = "fail_death_st", columnDefinition = "INTEGER DEFAULT 0") private int failDeathST = 0;
 
     // Character Info
     @Column(name = "personal_traits") private String personalTraits;
@@ -112,6 +114,6 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     // ToString
     @Override @NotNull
     public String toString() {
-        return characterName + " - " + level;
+        return (characterName != null && !characterName.isBlank() ? characterName : "SENZA NOME") + " - " + level;
     }
 }

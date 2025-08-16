@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,7 +34,13 @@ public final class ControllerDND5ESheets {
         Optional<DND5ECampaign> optCampaign = campaignRepository.findById(campaignID);
         optCampaign.ifPresent(campaign -> {
             model.addAttribute("campaign", campaign);
-            model.addAttribute("sheets", sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser()));
+            List<DND5ESheet> sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
+            if (sheets.isEmpty()) {
+                DND5ESheet testSheet = new DND5ESheet();
+                sheetRepository.save(testSheet);
+            }
+            sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
+            model.addAttribute("sheets", sheets);
         });
         return "dnd5e/sheets-list";
     }
