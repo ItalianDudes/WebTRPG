@@ -36,7 +36,7 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage;
 
     // Life
-    @Min(1) private int calculatedMaxHP;
+    @Min(1) @Transient private int calculatedMaxHP;
     @Min(1) @Column(name = "max_hp", columnDefinition = "INTEGER DEFAULT 20") private int maxHP = 20;
     @Column(name = "current_hp", columnDefinition = "INTEGER DEFAULT 20") private int currentHP = 20;
     @Min(0) @Column(name = "temp_hp", columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
