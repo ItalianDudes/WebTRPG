@@ -12,7 +12,8 @@
                 <img th:src="@{/dnd5e/favicon.ico}" th:href="@{'/dnd5e/'}" class="logo" title="Menu Principale" alt="WebTRPG"/>
             </a>
             <a href="/profile">
-                <img th:src="${userImage}" th:href="@{'/dnd5e/'}" class="profile" title="Profilo" alt="Profile"/>
+                <!--/*@thymesVar id="loggedUserDTO" type="it.italiandudes.webtrpg.core.data.UserDTO"*/-->
+                <img th:src="${loggedUserDTO.getUserImageOrDefault()}" th:href="@{'/dnd5e/'}" class="profile" title="Profilo" alt="Profile"/>
             </a>
         </header>
         <div class="particles">

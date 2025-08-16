@@ -14,7 +14,7 @@
             <p>SCHEDE DISPONIBILI:</p>
             <ul>
                 <th:block th:each="sheet : ${sheets}">
-                    <li><a th:text="@{${sheet.characterName} + '-' + ${sheet.level}}" th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets/' + ${sheet.id}}"></a></li>
+                    <li><a th:text="${sheet.toString()}" th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets/' + ${sheet.id}}"></a></li>
                 </th:block>
             </ul>
         </div>

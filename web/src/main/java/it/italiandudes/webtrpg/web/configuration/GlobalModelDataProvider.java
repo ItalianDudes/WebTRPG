@@ -1,6 +1,7 @@
 package it.italiandudes.webtrpg.web.configuration;
 
 import it.italiandudes.webtrpg.core.data.User;
+import it.italiandudes.webtrpg.core.data.UserDTO;
 import it.italiandudes.webtrpg.core.security.WebTRPGUserDetails;
 import it.italiandudes.webtrpg.core.security.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
@@ -21,12 +22,12 @@ public final class GlobalModelDataProvider {
         this.userRepository = userRepository;
     }
 
-    @ModelAttribute("loggedUser")
-    public User addUserToModel(Authentication authentication) {
+    @ModelAttribute("loggedUserDTO")
+    public UserDTO addUserToModel(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             WebTRPGUserDetails userDetails = (WebTRPGUserDetails) authentication.getPrincipal();
             Optional<User> optLoggedUser = userRepository.findById(userDetails.getUser().getId());
-            return optLoggedUser.orElse(null);
+            return optLoggedUser.map(UserDTO::fromUser).orElse(null);
         }
         return null;
     }
