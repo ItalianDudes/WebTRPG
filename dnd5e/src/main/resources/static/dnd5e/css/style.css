@@ -10,6 +10,7 @@
     --border:         #444444;
     --hover-bg:       rgba(212, 175, 55, 0.2);
     --footer-height:  3rem;
+    --header-height:  3rem;
 }
 
 /* 2) Full-height Layout */
@@ -18,6 +19,9 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+}
+body {
+    padding-top: var(--header-height);
 }
 
 /* 3) Global Reset */
@@ -380,3 +384,56 @@ body::before {
 .dnd5e-footer a {
     color: var(--accent);
 }
+
+/* Header */
+.dnd5e-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dnd5e-header a {
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.dnd5e-header img.logo {
+    height: calc(var(--header-height) - 10px);
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+.dnd5e-header img.logo:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.dnd5e-header img.profile {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;         /* Rende l'immagine circolare */
+    object-fit: cover;          /* Evita distorsioni */
+    border: 2px solid var(--accent); /* Optional: bordo colorato */
+    background-color: var(--surface); /* Optional: sfondo se l'immagine ha trasparenza */
+}
+
+.dnd5e-header img.profile:hover {
+    box-shadow: 0 0 5px var(--accent);
+    cursor: pointer;
+}
+

@@ -5,6 +5,7 @@
       lang="it">
     <div layout:fragment="content">
         <h1 style="text-align: center;">PROFILO</h1>
+        <img th:src="${userImage}" alt="Profile" height="128px" width="128px"/>
         <p th:text="${user.getUsername()}">NOME UTENTE</p><br/>
         <p th:text="${user.getMail()}">MAIL</p><br/>
         <p th:text="${user.getRole()}">RUOLO</p><br/>

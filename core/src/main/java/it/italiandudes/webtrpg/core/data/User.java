@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import it.italiandudes.webtrpg.core.security.enums.UserRole;
 
@@ -25,15 +26,17 @@ public class User extends AuditableEntity {
     @Column(unique = true, nullable = false) private String username;
     @Column(unique = true, nullable = false) private String mail;
     @Column(nullable = false) private String passwordHash;
+    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_image_id") private MimeImage userImage;
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0") private UserRole role = UserRole.USER;
 
     // Builder Constructor
     @Builder
-    public User(@NotNull final String username, @NotNull final String mail, @NotNull final String passwordHash, @NotNull final UserRole role) {
+    public User(@NotNull final String username, @NotNull final String mail, @NotNull final String passwordHash, @NotNull final UserRole role, @Nullable final MimeImage userImage) {
         this.username = username;
         this.mail = mail;
         this.passwordHash = passwordHash;
         this.role = role;
+        this.userImage = userImage;
     }
 
     // FromDTO

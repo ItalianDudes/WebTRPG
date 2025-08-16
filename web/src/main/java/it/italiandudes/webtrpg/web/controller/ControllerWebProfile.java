@@ -1,9 +1,11 @@
 package it.italiandudes.webtrpg.web.controller;
 
+import it.italiandudes.webtrpg.core.data.User;
 import it.italiandudes.webtrpg.core.data.VerificationToken;
 import it.italiandudes.webtrpg.core.security.WebTRPGUserDetails;
 import it.italiandudes.webtrpg.core.security.dto.UserDataEditorDTO;
 import it.italiandudes.webtrpg.core.security.enums.VerificationTokenType;
+import it.italiandudes.webtrpg.core.security.repository.UserRepository;
 import it.italiandudes.webtrpg.core.security.repository.VerificationTokenRepository;
 import it.italiandudes.webtrpg.core.security.service.WebTRPGUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,19 +31,24 @@ public final class ControllerWebProfile {
     // Attributes
     @NotNull private final WebTRPGUserDetailsService webTRPGUserDetailsService;
     @NotNull private final VerificationTokenRepository verificationTokenRepository;
+    @NotNull private final UserRepository userRepository;
 
     // Constructors
-    public ControllerWebProfile(@NotNull final WebTRPGUserDetailsService webTRPGUserDetailsService, @NotNull final VerificationTokenRepository verificationTokenRepository) {
+    public ControllerWebProfile(@NotNull final WebTRPGUserDetailsService webTRPGUserDetailsService, @NotNull final VerificationTokenRepository verificationTokenRepository, @NotNull final UserRepository userRepository) {
         this.webTRPGUserDetailsService = webTRPGUserDetailsService;
         this.verificationTokenRepository = verificationTokenRepository;
+        this.userRepository = userRepository;
     }
 
     // Profile Methods
     @GetMapping("/profile")
     public String profile(@AuthenticationPrincipal WebTRPGUserDetails userDetails, Model model) {
         assert userDetails != null; // Page protected
-        model.addAttribute("user", userDetails.getUser());
-        Optional<VerificationToken> optVerificationToken = verificationTokenRepository.findByUserAndType(userDetails.getUser(), VerificationTokenType.EMAIL_VERIFICATION);
+        Optional<User> optUser = userRepository.findById(userDetails.getUser().getId());
+        assert optUser.isPresent();
+        User loggedUser = optUser.get();
+        model.addAttribute("user", loggedUser);
+        Optional<VerificationToken> optVerificationToken = verificationTokenRepository.findByUserAndType(loggedUser, VerificationTokenType.EMAIL_VERIFICATION);
         if (optVerificationToken.isPresent()) {
             VerificationToken verificationToken = optVerificationToken.get();
             model.addAttribute("mailVerified", verificationToken.isVerified());

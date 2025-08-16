@@ -7,6 +7,14 @@
         <title layout:fragment="title">D&D5E-WebTRPG</title>
     </head>
     <body>
+        <header class="dnd5e-header">
+            <a href="/dnd5e">
+                <img th:src="@{/dnd5e/favicon.ico}" th:href="@{'/dnd5e/'}" class="logo" title="Menu Principale" alt="WebTRPG"/>
+            </a>
+            <a href="/profile">
+                <img th:src="${userImage}" th:href="@{'/dnd5e/'}" class="profile" title="Profilo" alt="Profile"/>
+            </a>
+        </header>
         <div class="particles">
             <span></span><span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span><span></span>
