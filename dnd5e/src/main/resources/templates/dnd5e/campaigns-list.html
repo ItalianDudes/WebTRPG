@@ -4,11 +4,14 @@
       layout:decorate="~{dnd5e/_base}"
       lang="it">
     <div layout:fragment="content">
-        <p>Campagne Disponibili:</p>
-        <ul>
-            <th:block th:each="campaign : ${campaigns}">
+        <div style="text-align: center;" th:if="${campaigns == null || campaigns.isEmpty()}">
+            <p>NESSUNA CAMPAGNA TROVATA</p>
+        </div>
+        <div th:if="${campaigns != null && !campaigns.isEmpty()}">
+            <p>Campagne Disponibili:</p>
+            <ul th:each="campaign : ${campaigns}">
                 <li><a th:text="${campaign.name}" th:href="@{'/dnd5e/campaigns/' + ${campaign.id}}"></a></li>
-            </th:block>
-        </ul>
+            </ul>
+        </div>
     </div>
 </html>
