@@ -21,13 +21,16 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class User extends AuditableEntity {
 
+    // Constants
+    public static final String DEFAULT_USER_PROFILE = "/web/default-profile-image.svg";
+
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @Column(unique = true, nullable = false) private String username;
-    @Column(unique = true, nullable = false) private String mail;
-    @Column(nullable = false) private String passwordHash;
+    @Column(name = "username", unique = true, nullable = false) private String username;
+    @Column(name = "mail", unique = true, nullable = false) private String mail;
+    @Column(name = "password_hash", nullable = false) private String passwordHash;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_image_id") private MimeImage userImage;
-    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0") private UserRole role = UserRole.USER;
+    @Column(name = "role", nullable = false, columnDefinition = "INTEGER DEFAULT 0") private UserRole role = UserRole.USER;
 
     // Builder Constructor
     @Builder
@@ -49,6 +52,12 @@ public class User extends AuditableEntity {
                 .build();
     }
 
+    // Methods
+    @NotNull
+    public String getUserImageOrDefault() {
+        return userImage != null ? userImage.toString() : DEFAULT_USER_PROFILE;
+    }
+
     // JPA Equals&HashCode
     @Override
     public final boolean equals(Object o) {
@@ -63,5 +72,11 @@ public class User extends AuditableEntity {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    // ToString
+    @Override @NotNull
+    public String toString() {
+        return username;
     }
 }

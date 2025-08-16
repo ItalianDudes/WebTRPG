@@ -11,27 +11,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.Optional;
 
 @ControllerAdvice
-public final class ModelUserImageProvider {
+public final class GlobalModelDataProvider {
 
-    // Constants
-    public static final String DEFAULT_USER_PROFILE = "/web/default-profile-image.svg";
+    // Attributes
     @NotNull private final UserRepository userRepository;
 
     // Constructors
-    public ModelUserImageProvider(@NotNull final UserRepository userRepository) {
+    public GlobalModelDataProvider(@NotNull final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @ModelAttribute("userImage")
-    public String addUserImageToModel(Authentication authentication) {
+    @ModelAttribute("loggedUser")
+    public User addUserToModel(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             WebTRPGUserDetails userDetails = (WebTRPGUserDetails) authentication.getPrincipal();
             Optional<User> optLoggedUser = userRepository.findById(userDetails.getUser().getId());
-            if (optLoggedUser.isPresent()) {
-                User loggedUser = optLoggedUser.get();
-                return loggedUser.getUserImage() != null ? loggedUser.getUserImage().toString() : DEFAULT_USER_PROFILE;
-            } else return DEFAULT_USER_PROFILE;
+            return optLoggedUser.orElse(null);
         }
-        return DEFAULT_USER_PROFILE;
+        return null;
     }
 }

@@ -4,8 +4,13 @@ import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -15,17 +20,15 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
-// @Check(constraints = "maxPlayers >= 2")
+@Check(constraints = "max_players >= 2")
 public class DND5ECampaign extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id") private User dungeonMaster;
-    @Column private String name;
-    @Column @Min(2) private int maxPlayers = 2; // DM Included
-    @Column private String description;
-
-
+    @Column(name = "name") private String name;
+    @Column(name = "max_players") @Min(2) private int maxPlayers = 2; // DM Included
+    @Column(name = "description") private String description;
 
     // Builder Constructor
     @Builder
@@ -50,5 +53,11 @@ public class DND5ECampaign extends AuditableEntity {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    // ToString
+    @Override @NotNull
+    public String toString() {
+        return name;
     }
 }
