@@ -16,7 +16,6 @@ import java.util.Objects;
 @Table(name = "users")
 @Getter
 @Setter
-@ToString(exclude = "passwordHash")
 @NoArgsConstructor // Needed for JPA
 @SuppressWarnings("unused")
 public class User extends AuditableEntity {
