@@ -1,33 +1,38 @@
-package it.italiandudes.webtrpg.core.data;
+package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
+import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.proficiency.DND5ELanguageProficiency;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
-import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "mime_images")
+@Table(name = "dnd5e_sheet_tabs_language_proficiencies")
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
-public class MimeImage extends AuditableEntity {
+@SuppressWarnings("unused")
+public class DND5ESheetTabLanguageProficiencies extends AuditableEntity {
 
-    // Attributes
+    // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @Column(name = "image_extension", nullable = false, updatable = false) private String imageExtension;
-    @Column(name = "base64image", nullable = false, updatable = false) private String base64image;
 
-    // Constructor
+    // Proficiencies
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "tab_language_proficiency_id") private List<DND5ELanguageProficiency> languages = new ArrayList<>();
+
+    // Constructors
     @Builder
-    public MimeImage(@NotNull final String imageExtension, @NotNull final String base64image) {
-        this.imageExtension = Objects.requireNonNull(imageExtension);
-        this.base64image = Objects.requireNonNull(base64image);
+    public DND5ESheetTabLanguageProficiencies(List<DND5ELanguageProficiency> languages) {
+        WebTRPGLogger.getLogger().debug(this.getClass().getName());
+        this.languages = languages != null ? languages : new ArrayList<>();
     }
 
     // JPA Equals&HashCode
@@ -38,17 +43,11 @@ public class MimeImage extends AuditableEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        MimeImage mimeImage = (MimeImage) o;
-        return getId() != null && Objects.equals(getId(), mimeImage.getId());
+        DND5ESheetTabLanguageProficiencies that = (DND5ESheetTabLanguageProficiencies) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
-    }
-
-    // ToString
-    @NotNull @Override
-    public String toString() {
-        return "data:image/" + imageExtension + ";base64," + base64image;
     }
 }

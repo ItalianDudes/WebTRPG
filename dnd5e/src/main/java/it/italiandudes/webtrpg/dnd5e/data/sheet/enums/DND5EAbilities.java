@@ -1,4 +1,4 @@
-package it.italiandudes.webtrpg.dnd5e.data.enums;
+package it.italiandudes.webtrpg.dnd5e.data.sheet.enums;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;

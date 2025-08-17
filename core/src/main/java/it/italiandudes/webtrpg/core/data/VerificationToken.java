@@ -1,5 +1,6 @@
 package it.italiandudes.webtrpg.core.data;
 
+import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.security.enums.VerificationTokenType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
@@ -10,9 +11,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "verification_tokens")
@@ -20,24 +23,24 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor // Needed for JPA
 @SuppressWarnings("unused")
-public class VerificationToken {
+public class VerificationToken extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "user_id", nullable = false) private User user;
-    @Size(min = 36, max = 36) @Column(name = "token", unique = true, nullable = false, updatable = false) private String token;
-    @Future @Column(name = "expiry_date", nullable = false, updatable = false) private LocalDateTime expiryDate;
+    @Size(min = 36, max = 36) @Column(name = "token", unique = true, nullable = false, updatable = false) private String token = UUID.randomUUID().toString();
+    @Future @Column(name = "expiry_date", nullable = false, updatable = false) private LocalDateTime expiryDate = LocalDateTime.now().plusWeeks(2);
     @Column(name = "token_type", nullable = false, updatable = false) @Enumerated(EnumType.STRING) private VerificationTokenType type;
-    @Column(name = "is_verified", nullable = false) private boolean isVerified;
+    @Column(name = "is_verified", nullable = false) private boolean isVerified = false;
 
     // Builder Constructor
     @Builder
-    public VerificationToken(@NotNull final User user, @NotNull final String token, @NotNull final VerificationTokenType type) {
-        this.user = user;
-        this.token = token;
-        this.type = type;
-        this.expiryDate = LocalDateTime.now().plusWeeks(2);
-        this.isVerified = false;
+    public VerificationToken(@NotNull final User user, @Nullable final String token, @NotNull final VerificationTokenType type, @Nullable final LocalDateTime expiryDate, @Nullable final Boolean isVerified) {
+        this.user = Objects.requireNonNull(user);
+        this.token = token != null ? token : UUID.randomUUID().toString();
+        this.type = Objects.requireNonNull(type);
+        this.expiryDate = expiryDate != null ? expiryDate : LocalDateTime.now().plusWeeks(2);
+        this.isVerified = isVerified != null ? isVerified : false;
     }
 
     // JPA Equals&HashCode

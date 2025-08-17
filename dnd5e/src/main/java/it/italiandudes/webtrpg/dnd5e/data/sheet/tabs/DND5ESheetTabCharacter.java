@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "dnd5e_tab_characters")
+@Table(name = "dnd5e_sheet_tabs_characters")
 @Check(constraints = "level >= 1 AND exp >= 0 AND max_hp >= 1 AND current_hp <= max_hp AND life_dice_faces >= 1 AND life_dice_total_amount >= 1 AND life_dice_current_amount >= 0 AND proficiency_bonus >= 0 AND inspiration_points >= 0")
 @Getter
 @Setter

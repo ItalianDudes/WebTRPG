@@ -1,7 +1,8 @@
 package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
+import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
-import it.italiandudes.webtrpg.dnd5e.data.enums.DND5EProficiencyLevel;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EProficiencyLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Builder;
@@ -14,13 +15,13 @@ import org.hibernate.proxy.HibernateProxy;
 import java.util.Objects;
 
 @Entity
-@Table(name = "dnd5e_tab_abilities")
+@Table(name = "dnd5e_sheet_tabs_abilities")
 @Getter
 @Setter
 @Check(constraints = "score_strength >= 0 AND score_dexterity >= 0 AND score_constitution >= 0 AND score_intelligence >= 0 AND score_wisdom >= 0 AND score_charisma >= 0")
 @NoArgsConstructor // Needed for JPA
 @SuppressWarnings("unused")
-public class DND5ESheetTabAbility {
+public class DND5ESheetTabAbility extends AuditableEntity {
 
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;

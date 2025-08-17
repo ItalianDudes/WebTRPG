@@ -1,4 +1,4 @@
-package it.italiandudes.webtrpg.dnd5e.data.enums;
+package it.italiandudes.webtrpg.dnd5e.data.sheet.enums;
 
 public enum DND5EMainAbilities {
     STRENGTH,
@@ -6,5 +6,5 @@ public enum DND5EMainAbilities {
     CONSTITUTION,
     INTELLIGENCE,
     WISDOM,
-    CHARISMA;
+    CHARISMA
 }

@@ -2,7 +2,9 @@ package it.italiandudes.webtrpg.dnd5e.controller;
 
 import it.italiandudes.webtrpg.core.security.WebTRPGUserDetails;
 import it.italiandudes.webtrpg.dnd5e.data.DND5ECampaign;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EProficiencyLevel;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.proficiency.DND5EWeaponProficiency;
 import it.italiandudes.webtrpg.dnd5e.repository.DND5ECampaignRepository;
 import it.italiandudes.webtrpg.dnd5e.repository.DND5ESheetRepository;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +38,8 @@ public final class ControllerDND5ESheets {
             model.addAttribute("campaign", campaign);
 
             DND5ESheet sheet = DND5ESheet.builder().campaign(campaign).owner(userDetails.getUser()).build();
+            sheet.getTabProficiencies().getWeapons().add(new DND5EWeaponProficiency("TESTER SPADA", DND5EProficiencyLevel.PROFICIENCY));
+            sheet.getTabProficiencies().getWeapons().add(new DND5EWeaponProficiency("TESTER SPADA PT2", DND5EProficiencyLevel.MASTERY));
             sheetRepository.save(sheet);
 
             List<DND5ESheet> sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
@@ -50,7 +54,10 @@ public final class ControllerDND5ESheets {
         if (optCampaign.isPresent()) {
             model.addAttribute("campaign", optCampaign.get());
             Optional<DND5ESheet> optSheet = sheetRepository.findById(sheetID);
-            optSheet.ifPresent(sheet -> model.addAttribute("sheet", sheet));
+            optSheet.ifPresent(sheet -> {
+                System.err.println(sheet.getTabProficiencies().getWeapons());
+                model.addAttribute("sheet", sheet);
+            });
         }
         return "dnd5e/sheet";
     }

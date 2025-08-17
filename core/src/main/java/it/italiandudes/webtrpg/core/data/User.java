@@ -34,10 +34,10 @@ public class User extends AuditableEntity {
     // Builder Constructor
     @Builder
     public User(@NotNull final String username, @NotNull final String mail, @NotNull final String passwordHash, @NotNull final UserRole role, @Nullable final MimeImage userImage) {
-        this.username = username;
-        this.mail = mail;
-        this.passwordHash = passwordHash;
-        this.role = role;
+        this.username = Objects.requireNonNull(username);
+        this.mail = Objects.requireNonNull(mail);
+        this.passwordHash = Objects.requireNonNull(passwordHash);
+        this.role = Objects.requireNonNull(role);
         this.userImage = userImage;
     }
 

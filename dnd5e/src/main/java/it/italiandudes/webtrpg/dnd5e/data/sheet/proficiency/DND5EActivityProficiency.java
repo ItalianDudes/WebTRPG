@@ -1,42 +1,39 @@
-package it.italiandudes.webtrpg.dnd5e.data;
+package it.italiandudes.webtrpg.dnd5e.data.sheet.proficiency;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
-import it.italiandudes.webtrpg.core.data.User;
+import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EProficiencyLevel;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "dnd5e_campaigns")
+@Table(name = "dnd5e_activity_proficiencies")
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
-@Check(constraints = "max_players >= 2")
 @SuppressWarnings("unused")
-public class DND5ECampaign extends AuditableEntity {
+public class DND5EActivityProficiency extends AuditableEntity {
+
+    // Entity ID
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Attributes
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id", nullable = false) private User dungeonMaster;
     @Column(name = "name", nullable = false) private String name = "";
-    @Column(name = "max_players", columnDefinition = "NOT NULL DEFAULT 2", nullable = false) @Min(2) private int maxPlayers = 2; // DM Included
-    @Column(name = "description", nullable = false) private String description = "";
+    @Column(name = "proficiency_level", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel proficiencyLevel = DND5EProficiencyLevel.NONE;
 
-    // Builder Constructor
+    // Constructors
     @Builder
-    public DND5ECampaign(User dungeonMaster, String name, Integer maxPlayers, String description) {
-        this.dungeonMaster = Objects.requireNonNull(dungeonMaster);
+    public DND5EActivityProficiency(String name, DND5EProficiencyLevel proficiencyLevel) {
+        WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.name = name != null ? name : "";
-        this.maxPlayers = maxPlayers != null ? maxPlayers : 2;
-        this.description = description != null ? description : "";
+        this.proficiencyLevel = proficiencyLevel != null ? proficiencyLevel : DND5EProficiencyLevel.NONE;
     }
 
     // JPA Equals&HashCode
@@ -47,8 +44,8 @@ public class DND5ECampaign extends AuditableEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        DND5ECampaign campaign = (DND5ECampaign) o;
-        return getId() != null && Objects.equals(getId(), campaign.getId());
+        DND5EActivityProficiency that = (DND5EActivityProficiency) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
     @Override
     public final int hashCode() {
@@ -58,6 +55,6 @@ public class DND5ECampaign extends AuditableEntity {
     // ToString
     @Override @NotNull
     public String toString() {
-        return name;
+        return "\"" + name + "\" - " + proficiencyLevel.name();
     }
 }
