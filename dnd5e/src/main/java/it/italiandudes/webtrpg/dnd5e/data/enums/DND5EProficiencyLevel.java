@@ -1,5 +1,6 @@
 package it.italiandudes.webtrpg.dnd5e.data.enums;
 
+// DO NOT CHANGE THE ENUM NAMES, SOME METHODS USE THE FINAL METHOD "name()" FOR THE DB
 public enum DND5EProficiencyLevel {
     SEVERE_INEPTITUDE,
     INEPTITUDE,

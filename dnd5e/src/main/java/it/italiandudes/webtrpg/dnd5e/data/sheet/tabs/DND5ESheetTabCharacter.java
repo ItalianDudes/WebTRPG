@@ -2,9 +2,10 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.MimeImage;
+import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -22,77 +22,78 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor // Needed for JPA
+@SuppressWarnings("unused")
 public class DND5ESheetTabCharacter extends AuditableEntity {
 
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Sheet Header
-    @Column(name = "character_name") private String characterName;
-    @Min(1) @Column(nullable = false, name = "level", columnDefinition = "INTEGER DEFAULT 1") private int level = 1;
-    @Column(name = "character_class") private String characterClass;
-    @Column(name = "background") private String background;
-    @Column(name = "race") private String race;
-    @Column(name = "alignment") private String alignment;
-    @Min(0) @Column(name = "exp", columnDefinition = "INTEGER DEFAULT 0") private int exp = 0;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage;
+    @Column(name = "character_name", nullable = false) private String characterName = "";
+    @Min(1) @Column(nullable = false, name = "level", columnDefinition = "NOT NULL DEFAULT 1") private int level = 1;
+    @Column(name = "character_class", nullable = false) private String characterClass = "";
+    @Column(name = "background", nullable = false) private String background = "";
+    @Column(name = "race", nullable = false) private String race = "";
+    @Column(name = "alignment", nullable = false) private String alignment = "";
+    @Min(0) @Column(name = "exp", columnDefinition = "NOT NULL DEFAULT 0") private int exp = 0;
+    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
 
     // Life
-    @Min(1) @Transient private int calculatedMaxHP;
-    @Min(1) @Column(name = "max_hp", columnDefinition = "INTEGER DEFAULT 20") private int maxHP = 20;
-    @Column(name = "current_hp", columnDefinition = "INTEGER DEFAULT 20") private int currentHP = 20;
-    @Column(name = "temp_hp", columnDefinition = "INTEGER DEFAULT 0") private int tempHP = 0;
-    @Min(1) @Column(name = "life_dice_faces", columnDefinition = "INTEGER DEFAULT 20") private int lifeDiceFaces = 20;
-    @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceTotalAmount = 1;
-    @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "INTEGER DEFAULT 1") private int lifeDiceCurrentAmount = 1;
+    // @Builder.Default @Min(1) @Transient private int calculatedMaxHP = 1;
+    @Min(1) @Column(name = "max_hp", columnDefinition = "NOT NULL DEFAULT 20") private int maxHP = 20;
+    @Column(name = "current_hp", columnDefinition = "NOT NULL DEFAULT 20") private int currentHP = 20;
+    @Column(name = "temp_hp", columnDefinition = "NOT NULL DEFAULT 0") private int tempHP = 0;
+    @Min(1) @Column(name = "life_dice_faces", columnDefinition = "NOT NULL DEFAULT 20") private int lifeDiceFaces = 20;
+    @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "NOT NULL DEFAULT 1") private int lifeDiceTotalAmount = 1;
+    @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "NOT NULL DEFAULT 1") private int lifeDiceCurrentAmount = 1;
 
     // Proficiency Bonus and Secondary Stats
-    @Min(0) @Column(name = "proficiency_bonus", columnDefinition = "INTEGER DEFAULT 2") private int proficiencyBonus = 2;
-    @Column(name = "speed") private String speed;
-    @Min(0) @Column(name = "inspiration_points", columnDefinition = "INTEGER DEFAULT 0") private int inspirationPoints = 0;
+    @Min(0) @Column(name = "proficiency_bonus", columnDefinition = "NOT NULL DEFAULT 2") private int proficiencyBonus = 2;
+    @Column(name = "speed", nullable = false) private String speed = "";
+    @Min(0) @Column(name = "inspiration_points", columnDefinition = "NOT NULL DEFAULT 0") private int inspirationPoints = 0;
 
     // ST Against Death
-    @Size(max = 3) @Column(name = "success_death_st", columnDefinition = "INTEGER DEFAULT 0") private int successDeathST = 0;
-    @Size(max = 3) @Column(name = "fail_death_st", columnDefinition = "INTEGER DEFAULT 0") private int failDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "success_death_st", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int successDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "fail_death_st", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int failDeathST = 0;
 
     // Character Info
-    @Column(name = "personal_traits") private String personalTraits;
-    @Column(name = "bonds") private String bonds;
-    @Column(name = "ideals") private String ideals;
-    @Column(name = "flaws") private String flaws;
+    @Column(name = "personal_traits", nullable = false) private String personalTraits = "";
+    @Column(name = "bonds", nullable = false) private String bonds = "";
+    @Column(name = "ideals", nullable = false) private String ideals = "";
+    @Column(name = "flaws", nullable = false) private String flaws = "";
 
     // Constructor
     @Builder
     public DND5ESheetTabCharacter(
-            @Nullable final String characterName, final int level, @Nullable final String characterClass,
-            @Nullable final String background, @Nullable final String race, @Nullable final String alignment,
-            final int exp, @Nullable MimeImage characterImage, final int maxHP, final int currentHP, final int tempHP,
-            final int lifeDiceFaces, final int lifeDiceTotalAmount, final int lifeDiceCurrentAmount, final int proficiencyBonus,
-            @Nullable final String speed, final int inspirationPoints, final int successDeathST, final int failDeathST,
-            @Nullable final String personalTraits, @Nullable final String bonds, @Nullable final String ideals, @Nullable final String flaws) {
-        this.characterName = characterName;
-        this.level = level;
-        this.characterClass = characterClass;
-        this.background = background;
-        this.race = race;
-        this.alignment = alignment;
-        this.exp = exp;
+            String characterName, Integer level, String characterClass, String background, String race,
+            String alignment, Integer exp, MimeImage characterImage, Integer maxHP, Integer currentHP,
+            Integer tempHP, Integer lifeDiceFaces, Integer lifeDiceTotalAmount, Integer lifeDiceCurrentAmount,
+            Integer proficiencyBonus, String speed, Integer inspirationPoints, Integer successDeathST,
+            Integer failDeathST, String personalTraits, String bonds, String ideals, String flaws) {
+        WebTRPGLogger.getLogger().debug(this.getClass().getName());
+        this.characterName = characterName != null ? characterName : "";
+        this.level = level != null ? level : 1;
+        this.characterClass = characterClass != null ? characterClass : "";
+        this.background = background != null ? background : "";
+        this.race = race != null ? race : "";
+        this.alignment = alignment != null ? race : "";
+        this.exp = exp != null ? exp : 0;
         this.characterImage = characterImage;
-        this.maxHP = maxHP;
-        this.currentHP = currentHP;
-        this.tempHP = tempHP;
-        this.lifeDiceFaces = lifeDiceFaces;
-        this.lifeDiceTotalAmount = lifeDiceTotalAmount;
-        this.lifeDiceCurrentAmount = lifeDiceCurrentAmount;
-        this.proficiencyBonus = proficiencyBonus;
-        this.speed = speed;
-        this.inspirationPoints = inspirationPoints;
-        this.successDeathST = successDeathST;
-        this.failDeathST = failDeathST;
-        this.personalTraits = personalTraits;
-        this.bonds = bonds;
-        this.ideals = ideals;
-        this.flaws = flaws;
+        this.maxHP = maxHP != null ? maxHP : 20;
+        this.currentHP = currentHP != null ? currentHP : 20;
+        this.tempHP = tempHP != null ? tempHP : 0;
+        this.lifeDiceFaces = lifeDiceFaces != null ? lifeDiceFaces : 20;
+        this.lifeDiceTotalAmount = lifeDiceTotalAmount != null ? lifeDiceTotalAmount : 1;
+        this.lifeDiceCurrentAmount = lifeDiceCurrentAmount != null ? lifeDiceCurrentAmount : 1;
+        this.proficiencyBonus = proficiencyBonus != null ? proficiencyBonus : 2;
+        this.speed = speed != null ? speed : "";
+        this.inspirationPoints = inspirationPoints != null ? inspirationPoints : 0;
+        this.successDeathST = successDeathST != null ? successDeathST : 0;
+        this.failDeathST = failDeathST != null ? failDeathST : 0;
+        this.personalTraits = personalTraits != null ? personalTraits : "";
+        this.bonds = bonds != null ? bonds : "";
+        this.ideals = ideals != null ? ideals : "";
+        this.flaws = flaws != null ? flaws : "";
     }
 
     // JPA Equals&HashCode

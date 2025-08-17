@@ -1,15 +1,15 @@
 package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
-import it.italiandudes.webtrpg.dnd5e.data.DND5EAbilitiesSet;
-import it.italiandudes.webtrpg.dnd5e.data.DND5EAbility;
-import it.italiandudes.webtrpg.dnd5e.data.DND5EMainAbilitiesSet;
+import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.enums.DND5EProficiencyLevel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -17,6 +17,7 @@ import java.util.Objects;
 @Table(name = "dnd5e_tab_abilities")
 @Getter
 @Setter
+@Check(constraints = "score_strength >= 0 AND score_dexterity >= 0 AND score_constitution >= 0 AND score_intelligence >= 0 AND score_wisdom >= 0 AND score_charisma >= 0")
 @NoArgsConstructor // Needed for JPA
 @SuppressWarnings("unused")
 public class DND5ESheetTabAbility {
@@ -24,15 +25,94 @@ public class DND5ESheetTabAbility {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
-    // Ability Scores
-    @OneToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "main_abilities_id", nullable = false, updatable = false) private DND5EMainAbilitiesSet mainAbilities = DND5EMainAbilitiesSet.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "abilities_id", nullable = false, updatable = false) private DND5EAbilitiesSet abilities = DND5EAbilitiesSet.builder().build();
+    // Main Abilities
+    @Min(0) @Column(name = "score_strength", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int strength = 8;
+    @Min(0) @Column(name = "score_dexterity", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int dexterity = 8;
+    @Min(0) @Column(name = "score_constitution", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int constitution = 8;
+    @Min(0) @Column(name = "score_intelligence", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int intelligence = 8;
+    @Min(0) @Column(name = "score_wisdom", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int wisdom = 8;
+    @Min(0) @Column(name = "score_charisma", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int charisma = 8;
+    
+    // Ability Proficiencies
+    @Column(name = "athletics", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel athletics = DND5EProficiencyLevel.NONE;
+    @Column(name = "acrobatics", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel acrobatics = DND5EProficiencyLevel.NONE;
+    @Column(name = "stealth", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stealth = DND5EProficiencyLevel.NONE;
+    @Column(name = "sleight_of_hand", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel sleightOfHand = DND5EProficiencyLevel.NONE;
+    @Column(name = "arcana", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel arcana = DND5EProficiencyLevel.NONE;
+    @Column(name = "investigation", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel investigation = DND5EProficiencyLevel.NONE;
+    @Column(name = "nature", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel nature = DND5EProficiencyLevel.NONE;
+    @Column(name = "religion", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel religion = DND5EProficiencyLevel.NONE;
+    @Column(name = "history", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel history = DND5EProficiencyLevel.NONE;
+    @Column(name = "animal_handling", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel animalHandling = DND5EProficiencyLevel.NONE;
+    @Column(name = "insight", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel insight = DND5EProficiencyLevel.NONE;
+    @Column(name = "medicine", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel medicine = DND5EProficiencyLevel.NONE;
+    @Column(name = "perception", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel perception = DND5EProficiencyLevel.NONE;
+    @Column(name = "survival", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel survival = DND5EProficiencyLevel.NONE;
+    @Column(name = "deception", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel deception = DND5EProficiencyLevel.NONE;
+    @Column(name = "intimidation", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel intimidation = DND5EProficiencyLevel.NONE;
+    @Column(name = "performance", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel performance = DND5EProficiencyLevel.NONE;
+    @Column(name = "persuasion", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel persuasion = DND5EProficiencyLevel.NONE;
 
     // Constructors
     @Builder
-    public DND5ESheetTabAbility(@NotNull final DND5EMainAbilitiesSet mainAbilities, @NotNull final DND5EAbilitiesSet abilities) {
-        this.mainAbilities = mainAbilities;
-        this.abilities = abilities;
+    public DND5ESheetTabAbility(
+            Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma,
+            DND5EProficiencyLevel athletics, DND5EProficiencyLevel acrobatics, DND5EProficiencyLevel stealth,
+            DND5EProficiencyLevel sleightOfHand, DND5EProficiencyLevel arcana, DND5EProficiencyLevel investigation,
+            DND5EProficiencyLevel nature, DND5EProficiencyLevel religion, DND5EProficiencyLevel history,
+            DND5EProficiencyLevel animalHandling, DND5EProficiencyLevel insight, DND5EProficiencyLevel medicine,
+            DND5EProficiencyLevel perception, DND5EProficiencyLevel survival, DND5EProficiencyLevel deception,
+            DND5EProficiencyLevel intimidation, DND5EProficiencyLevel performance, DND5EProficiencyLevel persuasion
+    ) {
+        WebTRPGLogger.getLogger().debug(this.getClass().getName());
+        this.strength = strength != null ? strength : 8;
+        this.dexterity = dexterity != null ? dexterity : 8;
+        this.constitution = constitution != null ? constitution : 8;
+        this.intelligence = intelligence != null ? intelligence : 8;
+        this.wisdom = wisdom != null ? wisdom : 8;
+        this.charisma = charisma != null ? charisma : 8;
+
+        this.athletics = athletics != null ? athletics : DND5EProficiencyLevel.NONE;
+        this.acrobatics = acrobatics != null ? acrobatics : DND5EProficiencyLevel.NONE;
+        this.stealth = stealth != null ? stealth : DND5EProficiencyLevel.NONE;
+        this.sleightOfHand = sleightOfHand != null ? sleightOfHand : DND5EProficiencyLevel.NONE;
+        this.arcana = arcana != null ? arcana : DND5EProficiencyLevel.NONE;
+        this.investigation = investigation != null ? investigation : DND5EProficiencyLevel.NONE;
+        this.nature = nature != null ? nature : DND5EProficiencyLevel.NONE;
+        this.religion = religion != null ? religion : DND5EProficiencyLevel.NONE;
+        this.history = history != null ? history : DND5EProficiencyLevel.NONE;
+        this.animalHandling = animalHandling != null ? animalHandling : DND5EProficiencyLevel.NONE;
+        this.insight = insight != null ? insight : DND5EProficiencyLevel.NONE;
+        this.medicine = medicine != null ? medicine : DND5EProficiencyLevel.NONE;
+        this.perception = perception != null ? perception : DND5EProficiencyLevel.NONE;
+        this.survival = survival != null ? survival : DND5EProficiencyLevel.NONE;
+        this.deception = deception != null ? deception : DND5EProficiencyLevel.NONE;
+        this.intimidation = intimidation != null ? intimidation : DND5EProficiencyLevel.NONE;
+        this.performance = performance != null ? performance : DND5EProficiencyLevel.NONE;
+        this.persuasion = persuasion != null ? persuasion : DND5EProficiencyLevel.NONE;
+    }
+    
+    // Methods
+    public static int getMainAbilityModifier(int score) {
+        return (int) Math.floor((score-10.0)/2.0);
+    }
+    public int getStrengthModifier() {
+        return getMainAbilityModifier(strength);
+    }
+    public int getDexterityModifier() {
+        return getMainAbilityModifier(dexterity);
+    }
+    public int getConstitutionModifier() {
+        return getMainAbilityModifier(constitution);
+    }
+    public int getIntelligenceModifier() {
+        return getMainAbilityModifier(intelligence);
+    }
+    public int getWisdomModifier() {
+        return getMainAbilityModifier(wisdom);
+    }
+    public int getCharismaModifier() {
+        return getMainAbilityModifier(charisma);
     }
 
     // JPA Equals&HashCode

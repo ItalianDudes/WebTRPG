@@ -34,12 +34,11 @@ public final class ControllerDND5ESheets {
         Optional<DND5ECampaign> optCampaign = campaignRepository.findById(campaignID);
         optCampaign.ifPresent(campaign -> {
             model.addAttribute("campaign", campaign);
+
+            DND5ESheet sheet = DND5ESheet.builder().campaign(campaign).owner(userDetails.getUser()).build();
+            sheetRepository.save(sheet);
+
             List<DND5ESheet> sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
-            if (sheets.isEmpty()) {
-                DND5ESheet testSheet = new DND5ESheet();
-                sheetRepository.save(testSheet);
-            }
-            sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
             model.addAttribute("sheets", sheets);
         });
         return "dnd5e/sheets-list";
