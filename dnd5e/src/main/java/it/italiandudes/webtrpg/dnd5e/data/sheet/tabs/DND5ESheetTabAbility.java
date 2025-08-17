@@ -32,6 +32,14 @@ public class DND5ESheetTabAbility {
     @Min(0) @Column(name = "score_intelligence", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int intelligence = 8;
     @Min(0) @Column(name = "score_wisdom", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int wisdom = 8;
     @Min(0) @Column(name = "score_charisma", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int charisma = 8;
+
+    // Saving Throws Proficiencies
+    @Column(name = "st_strength", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stStrength = DND5EProficiencyLevel.NONE;
+    @Column(name = "st_dexterity", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stDexterity = DND5EProficiencyLevel.NONE;
+    @Column(name = "st_constitution", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stConstitution = DND5EProficiencyLevel.NONE;
+    @Column(name = "st_intelligence", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stIntelligence = DND5EProficiencyLevel.NONE;
+    @Column(name = "st_wisdom", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stWisdom = DND5EProficiencyLevel.NONE;
+    @Column(name = "st_charisma", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel stCharisma = DND5EProficiencyLevel.NONE;
     
     // Ability Proficiencies
     @Column(name = "athletics", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel athletics = DND5EProficiencyLevel.NONE;
@@ -57,6 +65,8 @@ public class DND5ESheetTabAbility {
     @Builder
     public DND5ESheetTabAbility(
             Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma,
+            DND5EProficiencyLevel stStrength, DND5EProficiencyLevel stDexterity, DND5EProficiencyLevel stConstitution,
+            DND5EProficiencyLevel stIntelligence, DND5EProficiencyLevel stWisdom, DND5EProficiencyLevel stCharisma,
             DND5EProficiencyLevel athletics, DND5EProficiencyLevel acrobatics, DND5EProficiencyLevel stealth,
             DND5EProficiencyLevel sleightOfHand, DND5EProficiencyLevel arcana, DND5EProficiencyLevel investigation,
             DND5EProficiencyLevel nature, DND5EProficiencyLevel religion, DND5EProficiencyLevel history,
@@ -71,6 +81,13 @@ public class DND5ESheetTabAbility {
         this.intelligence = intelligence != null ? intelligence : 8;
         this.wisdom = wisdom != null ? wisdom : 8;
         this.charisma = charisma != null ? charisma : 8;
+
+        this.stStrength = stStrength != null ? stStrength : DND5EProficiencyLevel.NONE;
+        this.stDexterity = stDexterity != null ? stDexterity : DND5EProficiencyLevel.NONE;
+        this.stConstitution = stConstitution != null ? stConstitution : DND5EProficiencyLevel.NONE;
+        this.stIntelligence = stIntelligence != null ? stIntelligence : DND5EProficiencyLevel.NONE;
+        this.stWisdom = stWisdom != null ? stWisdom : DND5EProficiencyLevel.NONE;
+        this.stCharisma = stCharisma != null ? stCharisma : DND5EProficiencyLevel.NONE;
 
         this.athletics = athletics != null ? athletics : DND5EProficiencyLevel.NONE;
         this.acrobatics = acrobatics != null ? acrobatics : DND5EProficiencyLevel.NONE;

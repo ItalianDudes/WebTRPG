@@ -11,7 +11,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -25,18 +24,18 @@ public class DND5ECampaign extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id") private User dungeonMaster;
-    @Column(name = "name") private String name;
-    @Column(name = "max_players") @Min(2) private int maxPlayers = 2; // DM Included
-    @Column(name = "description") private String description;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id", nullable = false) private User dungeonMaster;
+    @Column(name = "name", nullable = false) private String name = "";
+    @Column(name = "max_players", columnDefinition = "NOT NULL DEFAULT 2", nullable = false) @Min(2) private int maxPlayers = 2; // DM Included
+    @Column(name = "description", nullable = false) private String description = "";
 
     // Builder Constructor
     @Builder
-    public DND5ECampaign(@Nullable final User dungeonMaster, @Nullable final String name, final int maxPlayers, @Nullable final String description) {
-        this.dungeonMaster = dungeonMaster;
-        this.name = name;
-        this.maxPlayers = maxPlayers;
-        this.description = description;
+    public DND5ECampaign(User dungeonMaster, String name, Integer maxPlayers, String description) {
+        this.dungeonMaster = Objects.requireNonNull(dungeonMaster);
+        this.name = name != null ? name : "";
+        this.maxPlayers = maxPlayers != null ? maxPlayers : 2;
+        this.description = description != null ? description : "";
     }
 
     // JPA Equals&HashCode
