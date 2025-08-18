@@ -8,7 +8,6 @@ public final class ControllerDND5EIndex {
 
     @GetMapping("/dnd5e")
     private String index() {
-
         return "dnd5e/index";
     }
 }
