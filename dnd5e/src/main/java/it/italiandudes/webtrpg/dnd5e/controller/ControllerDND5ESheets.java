@@ -2,10 +2,14 @@ package it.italiandudes.webtrpg.dnd5e.controller;
 
 import it.italiandudes.webtrpg.core.security.WebTRPGUserDetails;
 import it.italiandudes.webtrpg.dnd5e.data.DND5ECampaign;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EItemCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EProficiencyLevel;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.item.DND5EItem;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.proficiency.DND5EWeaponProficiency;
 import it.italiandudes.webtrpg.dnd5e.repository.DND5ECampaignRepository;
+import it.italiandudes.webtrpg.dnd5e.repository.DND5EItemRepository;
 import it.italiandudes.webtrpg.dnd5e.repository.DND5ESheetRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,11 +27,14 @@ public final class ControllerDND5ESheets {
     // Repositories
     @NotNull private final DND5ECampaignRepository campaignRepository;
     @NotNull private final DND5ESheetRepository sheetRepository;
+    private final DND5EItemRepository dND5EItemRepository;
 
     // Constructors
-    public ControllerDND5ESheets(@NotNull final DND5ECampaignRepository campaignRepository, @NotNull final DND5ESheetRepository sheetRepository) {
+    public ControllerDND5ESheets(@NotNull final DND5ECampaignRepository campaignRepository, @NotNull final DND5ESheetRepository sheetRepository,
+                                 DND5EItemRepository dND5EItemRepository) {
         this.campaignRepository = campaignRepository;
         this.sheetRepository = sheetRepository;
+        this.dND5EItemRepository = dND5EItemRepository;
     }
 
     // Mappings
@@ -41,6 +48,9 @@ public final class ControllerDND5ESheets {
             sheet.getTabProficiencies().getWeapons().add(new DND5EWeaponProficiency("TESTER SPADA", DND5EProficiencyLevel.PROFICIENCY));
             sheet.getTabProficiencies().getWeapons().add(new DND5EWeaponProficiency("TESTER SPADA PT2", DND5EProficiencyLevel.MASTERY));
             sheetRepository.save(sheet);
+
+            DND5EItem item = new DND5EItem("TESTER NAME", sheet, DND5EItemCategory.ITEM, null, DND5ERarity.EXOTIC, 1.5, 1, 1, "Tester Description");
+            dND5EItemRepository.save(item);
 
             List<DND5ESheet> sheets = sheetRepository.findAllByCampaignAndOwner(campaign, userDetails.getUser());
             model.addAttribute("sheets", sheets);
