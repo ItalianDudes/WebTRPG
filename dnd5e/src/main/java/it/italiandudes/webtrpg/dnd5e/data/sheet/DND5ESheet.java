@@ -4,10 +4,7 @@ import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.User;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
 import it.italiandudes.webtrpg.dnd5e.data.DND5ECampaign;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.tabs.DND5ESheetTabAbility;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.tabs.DND5ESheetTabCharacter;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.tabs.DND5ESheetTabLanguageProficiencies;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.tabs.DND5ESheetTabProficiencies;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.tabs.*;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,8 +34,8 @@ public class DND5ESheet extends AuditableEntity {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_ability_id", nullable = false) private DND5ESheetTabAbility tabAbility = DND5ESheetTabAbility.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_proficiencies_id", nullable = false) private DND5ESheetTabProficiencies tabProficiencies = DND5ESheetTabProficiencies.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_language_proficiencies_id", nullable = false) private DND5ESheetTabLanguageProficiencies tabLanguageProficiencies = DND5ESheetTabLanguageProficiencies.builder().build();
-    // TabTraits
-    // TabEquipments
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_privileges_and_traits_id", nullable = false) private DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits = DND5ESheetTabPrivilegesAndTraits.builder().build();
+    // TabEquipments (must be after TabInventory)
     // TabInventory
     // TabSpells
     // TabPhysicalDescription
@@ -52,7 +49,8 @@ public class DND5ESheet extends AuditableEntity {
     public DND5ESheet(
             final User owner, final DND5ECampaign campaign, Boolean isDead,
             final DND5ESheetTabCharacter tabCharacter, final DND5ESheetTabAbility tabAbility,
-            final DND5ESheetTabProficiencies tabProficiencies, final DND5ESheetTabLanguageProficiencies tabLanguageProficiencies
+            final DND5ESheetTabProficiencies tabProficiencies, final DND5ESheetTabLanguageProficiencies tabLanguageProficiencies,
+            final DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits
     ) {
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.owner = Objects.requireNonNull(owner);
@@ -62,6 +60,7 @@ public class DND5ESheet extends AuditableEntity {
         this.tabAbility = tabAbility != null ? tabAbility : DND5ESheetTabAbility.builder().build();
         this.tabProficiencies = tabProficiencies != null ? tabProficiencies : DND5ESheetTabProficiencies.builder().build();
         this.tabLanguageProficiencies = tabLanguageProficiencies != null ? tabLanguageProficiencies : DND5ESheetTabLanguageProficiencies.builder().build();
+        this.tabPrivilegesAndTraits = tabPrivilegesAndTraits != null ? tabPrivilegesAndTraits : DND5ESheetTabPrivilegesAndTraits.builder().build();
     }
 
     // JPA Equals&HashCode
