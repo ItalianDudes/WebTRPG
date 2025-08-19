@@ -33,7 +33,7 @@ public class DND5EItem extends AuditableEntity {
     @Column(name = "name", nullable = false) private String name = "";
     @Column(name = "item_category", nullable = false) @Enumerated(EnumType.STRING) private DND5EItemCategory itemCategory;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "item_image_id") private MimeImage itemImage = null;
-    @Column(name = "rarity", nullable = false) @Enumerated(EnumType.STRING) private DND5ERarity rarity = DND5ERarity.COMMON;
+    @Column(name = "rarity", nullable = false, columnDefinition = "NOT NULL DEFAULT 'COMMON'") @Enumerated(EnumType.STRING) private DND5ERarity rarity = DND5ERarity.COMMON;
     @Column(name = "weight", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private double weight = 0;
     @Column(name = "quantity", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int quantity = 0;
     @Column(name = "cost_mr", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int costMR = 0;

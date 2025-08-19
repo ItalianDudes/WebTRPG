@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.item;
 
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EEquipmentCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EItemCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
@@ -19,9 +20,6 @@ import java.util.Objects;
 @NoArgsConstructor // Needed for JPA
 public abstract class DND5EEquipment extends DND5EItem {
 
-    // Entity ID
-    // @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-
     // Equipment Data
     @Column(name = "equipment_category", nullable = false) @Enumerated(EnumType.STRING) private DND5EEquipmentCategory equipmentCategory;
     @Column(name = "ca_effect", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int caEffect = 0;
@@ -34,10 +32,10 @@ public abstract class DND5EEquipment extends DND5EItem {
 
     // Constructors
     public DND5EEquipment(
-            String name, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
+            String name, DND5ESheet sheet, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
             DND5EEquipmentCategory equipmentCategory, Integer caEffect, Integer lifeEffect, Integer loadEffect, Double lifeEffectPercentage, Double loadEffectPercentage, String otherEffects, Boolean isEquipped
     ) {
-        super(name, DND5EItemCategory.EQUIPMENT, itemImage, rarity, weight, quantity, costMR, description);
+        super(name, sheet, DND5EItemCategory.EQUIPMENT, itemImage, rarity, weight, quantity, costMR, description);
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.equipmentCategory = Objects.requireNonNull(equipmentCategory);
         this.caEffect = caEffect != null ? caEffect : 0;
