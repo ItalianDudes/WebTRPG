@@ -26,7 +26,7 @@ public class DND5ESheetTabStatusEffects extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Proficiencies
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "sheet_id") private List<DND5EStatusEffect> statusEffects = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id") private List<DND5EStatusEffect> statusEffects = new ArrayList<>();
 
     // Constructors
     @Builder
