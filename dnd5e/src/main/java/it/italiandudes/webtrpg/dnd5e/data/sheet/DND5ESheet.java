@@ -38,10 +38,10 @@ public class DND5ESheet extends AuditableEntity {
     // TabEquipments (must be after TabInventory)
     // TabInventory
     // TabSpells
-    // TabPhysicalDescription
-    // TabStory
-    // TabNotes
-    // TabEffects
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_physical_description_id", nullable = false) private DND5ESheetTabPhysicalDescription tabPhysicalDescription = DND5ESheetTabPhysicalDescription.builder().build();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_story_id", nullable = false) private DND5ESheetTabStory tabStory = DND5ESheetTabStory.builder().build();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_notes_id", nullable = false) private DND5ESheetTabNotes tabNotes = DND5ESheetTabNotes.builder().build();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_status_effects_id", nullable = false) private DND5ESheetTabStatusEffects tabStatusEffects = DND5ESheetTabStatusEffects.builder().build();
     // TabDiceRoller
 
     // Constructors
@@ -50,7 +50,9 @@ public class DND5ESheet extends AuditableEntity {
             final User owner, final DND5ECampaign campaign, Boolean isDead,
             final DND5ESheetTabCharacter tabCharacter, final DND5ESheetTabAbility tabAbility,
             final DND5ESheetTabProficiencies tabProficiencies, final DND5ESheetTabLanguageProficiencies tabLanguageProficiencies,
-            final DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits
+            final DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits,
+            final DND5ESheetTabPhysicalDescription tabPhysicalDescription, final DND5ESheetTabStory tabStory,
+            final DND5ESheetTabNotes tabNotes, final DND5ESheetTabStatusEffects tabStatusEffects
     ) {
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.owner = Objects.requireNonNull(owner);
@@ -61,6 +63,10 @@ public class DND5ESheet extends AuditableEntity {
         this.tabProficiencies = tabProficiencies != null ? tabProficiencies : DND5ESheetTabProficiencies.builder().build();
         this.tabLanguageProficiencies = tabLanguageProficiencies != null ? tabLanguageProficiencies : DND5ESheetTabLanguageProficiencies.builder().build();
         this.tabPrivilegesAndTraits = tabPrivilegesAndTraits != null ? tabPrivilegesAndTraits : DND5ESheetTabPrivilegesAndTraits.builder().build();
+        this.tabPhysicalDescription = tabPhysicalDescription != null ? tabPhysicalDescription : DND5ESheetTabPhysicalDescription.builder().build();
+        this.tabStory = tabStory != null ? tabStory : DND5ESheetTabStory.builder().build();
+        this.tabNotes = tabNotes != null ? tabNotes : DND5ESheetTabNotes.builder().build();
+        this.tabStatusEffects = tabStatusEffects != null ? tabStatusEffects : DND5ESheetTabStatusEffects.builder().build();
     }
 
     // JPA Equals&HashCode
