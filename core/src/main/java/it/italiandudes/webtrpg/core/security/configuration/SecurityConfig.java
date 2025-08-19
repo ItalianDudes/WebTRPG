@@ -1,9 +1,13 @@
 package it.italiandudes.webtrpg.core.security.configuration;
 
+import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
 import it.italiandudes.webtrpg.core.security.filter.UserExistenceFilter;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.ConnectionCallback;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -19,6 +23,9 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+import java.sql.DatabaseMetaData;
+
+@SuppressWarnings("SqlDialectInspection")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -48,6 +55,22 @@ public class SecurityConfig {
     // Constructors
     public SecurityConfig(@NotNull final UserExistenceFilter userExistenceFilter) {
         this.userExistenceFilter = userExistenceFilter;
+    }
+
+    // DB Triggers
+    @Bean
+    public CommandLineRunner executeDBMSSpecificQueries(JdbcTemplate jdbcTemplate) {
+        return args -> jdbcTemplate.execute((ConnectionCallback<Object>) (connection) -> {
+            DatabaseMetaData meta = connection.getMetaData();
+            String dbName = meta.getDatabaseProductName();
+            WebTRPGLogger.getLogger().debug("Database name: {}", dbName);
+
+            //noinspection SwitchStatementWithTooFewBranches
+            switch (dbName.toLowerCase()) {
+                case "sqlite" -> {}
+            }
+            return null;
+        });
     }
 
     // HTTP Routes
