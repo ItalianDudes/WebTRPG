@@ -27,8 +27,8 @@ public class DND5ESheetTabPrivilegesAndTraits extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Privileges & Traits
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "tab_privileges_and_traits_id") private List<DND5EClassPrivilege> classPrivileges = new ArrayList<>();
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "tab_privileges_and_traits_id") private List<DND5ETrait> traits = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "sheet_id") private List<DND5EClassPrivilege> classPrivileges = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) @JoinColumn(name = "sheet_id") private List<DND5ETrait> traits = new ArrayList<>();
 
     // Constructors
     @Builder
