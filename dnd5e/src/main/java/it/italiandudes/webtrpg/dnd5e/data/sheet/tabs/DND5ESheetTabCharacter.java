@@ -30,31 +30,31 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
 
     // Sheet Header
     @Column(name = "character_name", nullable = false) private String characterName = "";
-    @Min(1) @Column(name = "level", columnDefinition = "NOT NULL DEFAULT 1", nullable = false) private int level = 1;
+    @Min(1) @Column(name = "level", columnDefinition = "INT DEFAULT 1", nullable = false) private int level = 1;
     @Column(name = "character_class", nullable = false) private String characterClass = "";
     @Column(name = "background", nullable = false) private String background = "";
     @Column(name = "race", nullable = false) private String race = "";
     @Column(name = "alignment", nullable = false) private String alignment = "";
-    @Min(0) @Column(name = "exp", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private int exp = 0;
+    @Min(0) @Column(name = "exp", columnDefinition = "INT DEFAULT 0", nullable = false) private int exp = 0;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
 
     // Life
     // @Builder.Default @Min(1) @Transient private int calculatedMaxHP = 1;
-    @Min(1) @Column(name = "max_hp", columnDefinition = "NOT NULL DEFAULT 20", nullable = false) private int maxHP = 20;
-    @Column(name = "current_hp", columnDefinition = "NOT NULL DEFAULT 20", nullable = false) private int currentHP = 20;
-    @Column(name = "temp_hp", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private int tempHP = 0;
-    @Min(1) @Column(name = "life_dice_faces", columnDefinition = "NOT NULL DEFAULT 20", nullable = false) private int lifeDiceFaces = 20;
-    @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "NOT NULL DEFAULT 1", nullable = false) private int lifeDiceTotalAmount = 1;
-    @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "NOT NULL DEFAULT 1", nullable = false) private int lifeDiceCurrentAmount = 1;
+    @Min(1) @Column(name = "max_hp", columnDefinition = "INT DEFAULT 20", nullable = false) private int maxHP = 20;
+    @Column(name = "current_hp", columnDefinition = "INT DEFAULT 20", nullable = false) private int currentHP = 20;
+    @Column(name = "temp_hp", columnDefinition = "INT DEFAULT 0", nullable = false) private int tempHP = 0;
+    @Min(1) @Column(name = "life_dice_faces", columnDefinition = "INT DEFAULT 20", nullable = false) private int lifeDiceFaces = 20;
+    @Min(1) @Column(name = "life_dice_total_amount", columnDefinition = "INT DEFAULT 1", nullable = false) private int lifeDiceTotalAmount = 1;
+    @Min(0) @Column(name = "life_dice_current_amount", columnDefinition = "INT DEFAULT 1", nullable = false) private int lifeDiceCurrentAmount = 1;
 
     // Proficiency Bonus and Secondary Stats
-    @Min(0) @Column(name = "proficiency_bonus", columnDefinition = "NOT NULL DEFAULT 2", nullable = false) private int proficiencyBonus = 2;
+    @Min(0) @Column(name = "proficiency_bonus", columnDefinition = "INT DEFAULT 2", nullable = false) private int proficiencyBonus = 2;
     @Column(name = "speed", nullable = false) private String speed = "";
-    @Min(0) @Column(name = "inspiration_points", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private int inspirationPoints = 0;
+    @Min(0) @Column(name = "inspiration_points", columnDefinition = "INT DEFAULT 0", nullable = false) private int inspirationPoints = 0;
 
     // ST Against Death
-    @Min(0) @Max(3) @Column(name = "success_death_st", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private int successDeathST = 0;
-    @Min(0) @Max(3) @Column(name = "fail_death_st", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private int failDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "success_death_st", columnDefinition = "INT DEFAULT 0", nullable = false) private int successDeathST = 0;
+    @Min(0) @Max(3) @Column(name = "fail_death_st", columnDefinition = "INT DEFAULT 0", nullable = false) private int failDeathST = 0;
 
     // Character Info
     @Column(name = "personal_traits", nullable = false) private String personalTraits = "";

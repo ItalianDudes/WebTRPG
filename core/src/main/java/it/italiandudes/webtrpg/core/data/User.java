@@ -29,7 +29,7 @@ public class User extends AuditableEntity {
     @Column(name = "mail", unique = true, nullable = false) private String mail;
     @Column(name = "password_hash", nullable = false) private String passwordHash;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_image_id") private MimeImage userImage;
-    @Column(name = "role", nullable = false, columnDefinition = "NOT NULL DEFAULT \"USER\"") @Enumerated(EnumType.STRING) private UserRole role = UserRole.USER;
+    @Column(name = "role", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT \"USER\"") @Enumerated(EnumType.STRING) private UserRole role = UserRole.USER;
 
     // Builder Constructor
     @Builder

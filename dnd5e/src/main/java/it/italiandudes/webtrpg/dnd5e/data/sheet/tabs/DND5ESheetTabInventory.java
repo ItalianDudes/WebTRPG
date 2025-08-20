@@ -33,11 +33,11 @@ public class DND5ESheetTabInventory extends AuditableEntity {
     // TODO: Should I put Load% Load Category
 
     // Money
-    @Column(name = "mc", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int mc = 0;
-    @Column(name = "ms", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int ms = 0;
-    @Column(name = "me", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int me = 0;
-    @Column(name = "mg", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int mg = 0;
-    @Column(name = "mp", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int mp = 0;
+    @Column(name = "mc", nullable = false, columnDefinition = "INT DEFAULT 0") private int mc = 0;
+    @Column(name = "ms", nullable = false, columnDefinition = "INT DEFAULT 0") private int ms = 0;
+    @Column(name = "me", nullable = false, columnDefinition = "INT DEFAULT 0") private int me = 0;
+    @Column(name = "mg", nullable = false, columnDefinition = "INT DEFAULT 0") private int mg = 0;
+    @Column(name = "mp", nullable = false, columnDefinition = "INT DEFAULT 0") private int mp = 0;
 
     // Items
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EItem> items = new ArrayList<>();

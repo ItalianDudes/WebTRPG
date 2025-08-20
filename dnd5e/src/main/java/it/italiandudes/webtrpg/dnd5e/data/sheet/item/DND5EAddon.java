@@ -2,7 +2,6 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.item;
 
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EAddonSlot;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EEquipmentCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
@@ -20,15 +19,15 @@ import lombok.Setter;
 public class DND5EAddon extends DND5EEquipment {
 
     // Armor Data
-    @Column(name = "slot", nullable = false, columnDefinition = "NOT NULL DEFAULT 'NECKLACE'") @Enumerated(EnumType.STRING) private DND5EAddonSlot slot = DND5EAddonSlot.NECKLACE;
+    @Column(name = "slot", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'NECKLACE'") @Enumerated(EnumType.STRING) private DND5EAddonSlot slot = DND5EAddonSlot.NECKLACE;
 
     // Constructors
     public DND5EAddon(
-            String name, DND5ESheet sheet, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
+            String name, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
             Integer caEffect, Integer lifeEffect, Integer loadEffect, Double lifeEffectPercentage, Double loadEffectPercentage, String otherEffects, Boolean isEquipped,
             DND5EAddonSlot slot
     ) {
-        super(name, sheet, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.ADDON, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
+        super(name, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.ADDON, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.slot = slot != null ? slot : DND5EAddonSlot.NECKLACE;
     }

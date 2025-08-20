@@ -27,7 +27,7 @@ public class DND5ESheet extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "owner_id", nullable = false) private User owner;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "campaign_id", nullable = false) private DND5ECampaign campaign;
-    @Column(name = "is_dead", columnDefinition = "NOT NULL DEFAULT 0", nullable = false) private boolean isDead = false;
+    @Column(name = "is_dead", columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false) private boolean isDead = false;
 
     // Tabs
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_character_id", nullable = false) private DND5ESheetTabCharacter tabCharacter = DND5ESheetTabCharacter.builder().build();
@@ -37,7 +37,7 @@ public class DND5ESheet extends AuditableEntity {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_privileges_and_traits_id", nullable = false) private DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits = DND5ESheetTabPrivilegesAndTraits.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_equipment_id", nullable = false) private DND5ESheetTabEquipment tabEquipment = DND5ESheetTabEquipment.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_inventory_id", nullable = false) private DND5ESheetTabInventory tabInventory = DND5ESheetTabInventory.builder().build();
-    // TabSpells
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_spells_id", nullable = false) private DND5ESheetTabSpells tabSpells = DND5ESheetTabSpells.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_physical_description_id", nullable = false) private DND5ESheetTabPhysicalDescription tabPhysicalDescription = DND5ESheetTabPhysicalDescription.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_story_id", nullable = false) private DND5ESheetTabStory tabStory = DND5ESheetTabStory.builder().build();
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_notes_id", nullable = false) private DND5ESheetTabNotes tabNotes = DND5ESheetTabNotes.builder().build();
@@ -50,10 +50,11 @@ public class DND5ESheet extends AuditableEntity {
             final User owner, final DND5ECampaign campaign, Boolean isDead,
             final DND5ESheetTabCharacter tabCharacter, final DND5ESheetTabAbility tabAbility,
             final DND5ESheetTabProficiencies tabProficiencies, final DND5ESheetTabLanguageProficiencies tabLanguageProficiencies,
-            final DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits,
-            final DND5ESheetTabEquipment tabEquipment, final DND5ESheetTabInventory tabInventory,
+            final DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits, final DND5ESheetTabEquipment tabEquipment,
+            final DND5ESheetTabInventory tabInventory, final DND5ESheetTabSpells tabSpells,
             final DND5ESheetTabPhysicalDescription tabPhysicalDescription, final DND5ESheetTabStory tabStory,
-            final DND5ESheetTabNotes tabNotes, final DND5ESheetTabStatusEffects tabStatusEffects, final DND5ESheetTabDiceRoller tabDiceRoller
+            final DND5ESheetTabNotes tabNotes, final DND5ESheetTabStatusEffects tabStatusEffects,
+            final DND5ESheetTabDiceRoller tabDiceRoller
     ) {
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.owner = Objects.requireNonNull(owner);

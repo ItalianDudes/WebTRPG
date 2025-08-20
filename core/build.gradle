@@ -7,7 +7,7 @@ version = versionNumber+versionMarker
 dependencies {
 
     // Database
-    implementation 'org.xerial:sqlite-jdbc:3.50.3.0' // SQLITE
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.2' // MariaDB
     implementation 'org.hibernate.orm:hibernate-community-dialects:7.0.7.Final'
     implementation 'org.liquibase:liquibase-core'
 

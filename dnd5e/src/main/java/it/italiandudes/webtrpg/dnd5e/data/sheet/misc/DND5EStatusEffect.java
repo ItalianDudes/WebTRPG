@@ -28,18 +28,18 @@ public class DND5EStatusEffect extends AuditableEntity {
 
     // Attributes
     @Column(name = "name", nullable = false) private String name = "";
-    @Column(name = "nature", nullable = false, columnDefinition = "NOT NULL DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectNature nature = DND5EStatusEffectNature.UNKNOWN;
-    @Column(name = "source", nullable = false, columnDefinition = "NOT NULL DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectSource source = DND5EStatusEffectSource.UNKNOWN;
+    @Column(name = "nature", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectNature nature = DND5EStatusEffectNature.UNKNOWN;
+    @Column(name = "source", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectSource source = DND5EStatusEffectSource.UNKNOWN;
     @Column(name = "is_active", nullable = false) private boolean isActive = false;
-    @Column(name = "is_curable", nullable = false, columnDefinition = "NOT NULL DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isCurable = DND5EStatusEffectKnowledge.UNKNOWN;
-    @Column(name = "is_treatable", nullable = false, columnDefinition = "NOT NULL DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isTreatable = DND5EStatusEffectKnowledge.UNKNOWN;
-    @Column(name = "is_lethal", nullable = false, columnDefinition = "NOT NULL DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isLethal = DND5EStatusEffectKnowledge.UNKNOWN;
+    @Column(name = "is_curable", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isCurable = DND5EStatusEffectKnowledge.UNKNOWN;
+    @Column(name = "is_treatable", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isTreatable = DND5EStatusEffectKnowledge.UNKNOWN;
+    @Column(name = "is_lethal", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'UNKNOWN'") @Enumerated(EnumType.STRING) private DND5EStatusEffectKnowledge isLethal = DND5EStatusEffectKnowledge.UNKNOWN;
     @Column(name = "duration", nullable = false) private String duration = "";
-    @Column(name = "ca_effect", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int caEffect = 0;
-    @Column(name = "life_effect", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int lifeEffect = 0;
-    @Column(name = "load_effect", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int loadEffect = 0;
-    @Column(name = "life_effect_perc", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private double lifeEffectPercentage = 0;
-    @Column(name = "load_effect_perc", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private double loadEffectPercentage = 0;
+    @Column(name = "ca_effect", nullable = false, columnDefinition = "INT DEFAULT 0") private int caEffect = 0;
+    @Column(name = "life_effect", nullable = false, columnDefinition = "INT DEFAULT 0") private int lifeEffect = 0;
+    @Column(name = "load_effect", nullable = false, columnDefinition = "INT DEFAULT 0") private int loadEffect = 0;
+    @Column(name = "life_effect_perc", nullable = false, columnDefinition = "INT DEFAULT 0") private double lifeEffectPercentage = 0;
+    @Column(name = "load_effect_perc", nullable = false, columnDefinition = "INT DEFAULT 0") private double loadEffectPercentage = 0;
     @Column(name = "other_effects", nullable = false) private String otherEffects = "";
     @Column(name = "description", nullable = false) private String description = "";
 

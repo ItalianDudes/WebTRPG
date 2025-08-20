@@ -27,7 +27,7 @@ public class DND5ECampaign extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "dungeon_master_id", nullable = false) private User dungeonMaster;
     @Column(name = "name", nullable = false) private String name = "";
-    @Column(name = "max_players", columnDefinition = "NOT NULL DEFAULT 2", nullable = false) @Min(2) private int maxPlayers = 2; // DM Included
+    @Column(name = "max_players", columnDefinition = "INT DEFAULT 2", nullable = false) @Min(2) private int maxPlayers = 2; // DM Included
     @Column(name = "description", nullable = false) private String description = "";
 
     // Builder Constructor

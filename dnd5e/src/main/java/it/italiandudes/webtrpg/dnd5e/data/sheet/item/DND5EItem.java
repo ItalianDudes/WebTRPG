@@ -3,7 +3,6 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.item;
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EItemCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
 import jakarta.persistence.*;
@@ -26,24 +25,20 @@ public class DND5EItem extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
-    // Sheet ID
-    @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "sheet_id", nullable = false) private DND5ESheet sheet;
-
     // Item Data
     @Column(name = "name", nullable = false) private String name = "";
     @Column(name = "item_category", nullable = false) @Enumerated(EnumType.STRING) private DND5EItemCategory itemCategory;
     @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "item_image_id") private MimeImage itemImage = null;
-    @Column(name = "rarity", nullable = false, columnDefinition = "NOT NULL DEFAULT 'COMMON'") @Enumerated(EnumType.STRING) private DND5ERarity rarity = DND5ERarity.COMMON;
-    @Column(name = "weight", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private double weight = 0;
-    @Column(name = "quantity", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int quantity = 0;
-    @Column(name = "cost_mr", nullable = false, columnDefinition = "NOT NULL DEFAULT 0") private int costMR = 0;
+    @Column(name = "rarity", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'COMMON'") @Enumerated(EnumType.STRING) private DND5ERarity rarity = DND5ERarity.COMMON;
+    @Column(name = "weight", nullable = false, columnDefinition = "INT DEFAULT 0") private double weight = 0;
+    @Column(name = "quantity", nullable = false, columnDefinition = "INT DEFAULT 0") private int quantity = 0;
+    @Column(name = "cost_mr", nullable = false, columnDefinition = "INT DEFAULT 0") private int costMR = 0;
     @Column(name = "description", nullable = false) private String description = "";
 
     // Constructors
-    public DND5EItem(String name, DND5ESheet sheet, DND5EItemCategory itemCategory, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description) {
+    public DND5EItem(String name, DND5EItemCategory itemCategory, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description) {
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.name = name != null ? name : "";
-        this.sheet = Objects.requireNonNull(sheet);
         this.itemCategory = Objects.requireNonNull(itemCategory);
         this.itemImage = itemImage;
         this.rarity = rarity != null ? rarity : DND5ERarity.COMMON;

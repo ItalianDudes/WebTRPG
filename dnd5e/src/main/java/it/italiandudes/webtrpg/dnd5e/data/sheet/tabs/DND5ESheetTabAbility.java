@@ -27,12 +27,12 @@ public class DND5ESheetTabAbility extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Main Abilities
-    @Min(0) @Column(name = "score_strength", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int strength = 8;
-    @Min(0) @Column(name = "score_dexterity", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int dexterity = 8;
-    @Min(0) @Column(name = "score_constitution", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int constitution = 8;
-    @Min(0) @Column(name = "score_intelligence", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int intelligence = 8;
-    @Min(0) @Column(name = "score_wisdom", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int wisdom = 8;
-    @Min(0) @Column(name = "score_charisma", columnDefinition = "NOT NULL DEFAULT 8", nullable = false) private int charisma = 8;
+    @Min(0) @Column(name = "score_strength", columnDefinition = "INT DEFAULT 8", nullable = false) private int strength = 8;
+    @Min(0) @Column(name = "score_dexterity", columnDefinition = "INT DEFAULT 8", nullable = false) private int dexterity = 8;
+    @Min(0) @Column(name = "score_constitution", columnDefinition = "INT DEFAULT 8", nullable = false) private int constitution = 8;
+    @Min(0) @Column(name = "score_intelligence", columnDefinition = "INT DEFAULT 8", nullable = false) private int intelligence = 8;
+    @Min(0) @Column(name = "score_wisdom", columnDefinition = "INT DEFAULT 8", nullable = false) private int wisdom = 8;
+    @Min(0) @Column(name = "score_charisma", columnDefinition = "INT DEFAULT 8", nullable = false) private int charisma = 8;
 
     // Saving Throws Proficiencies
     @Column(name = "proficiency_strength", nullable = false) @Enumerated(EnumType.STRING) private DND5EProficiencyLevel proficiencyStrength = DND5EProficiencyLevel.NONE;

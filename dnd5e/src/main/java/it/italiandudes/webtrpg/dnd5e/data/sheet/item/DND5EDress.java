@@ -2,7 +2,6 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.item;
 
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EEquipmentCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EWearableWeightCategory;
@@ -20,16 +19,16 @@ import lombok.Setter;
 public class DND5EDress extends DND5EEquipment {
 
     // Armor Data
-    @Column(name = "weight_category", nullable = false, columnDefinition = "NOT NULL DEFAULT 'LIGHT'") @Enumerated(EnumType.STRING) private DND5EWearableWeightCategory weightCategory = DND5EWearableWeightCategory.LIGHT;
+    @Column(name = "weight_category", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'LIGHT'") @Enumerated(EnumType.STRING) private DND5EWearableWeightCategory weightCategory = DND5EWearableWeightCategory.LIGHT;
 
 
     // Constructors
     public DND5EDress(
-            String name, DND5ESheet sheet, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
+            String name, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
             Integer caEffect, Integer lifeEffect, Integer loadEffect, Double lifeEffectPercentage, Double loadEffectPercentage, String otherEffects, Boolean isEquipped,
             DND5EWearableWeightCategory weightCategory
     ) {
-        super(name, sheet, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.DRESS, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
+        super(name, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.DRESS, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.weightCategory = weightCategory != null ? weightCategory : DND5EWearableWeightCategory.LIGHT;
     }

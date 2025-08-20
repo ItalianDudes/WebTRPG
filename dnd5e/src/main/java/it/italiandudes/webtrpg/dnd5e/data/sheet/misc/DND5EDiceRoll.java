@@ -24,8 +24,8 @@ public class DND5EDiceRoll extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Attributes
-    @Column(name = "face_count", nullable = false, columnDefinition = "NOT NULL DEFAULT 20") private int faceCount = 20;
-    @Column(name = "roll", nullable = false, columnDefinition = "NOT NULL DEFAULT 1") private int roll = 1;
+    @Column(name = "face_count", nullable = false, columnDefinition = "INT DEFAULT 20") private int faceCount = 20;
+    @Column(name = "roll", nullable = false, columnDefinition = "INT DEFAULT 1") private int roll = 1;
 
     // Constructors
     @Builder

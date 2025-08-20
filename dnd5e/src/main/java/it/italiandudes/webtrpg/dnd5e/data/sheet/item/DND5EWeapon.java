@@ -2,7 +2,6 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.item;
 
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
-import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EEquipmentCategory;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5ERarity;
 import jakarta.persistence.*;
@@ -24,11 +23,11 @@ public class DND5EWeapon extends DND5EEquipment {
 
     // Constructors
     public DND5EWeapon(
-            String name, DND5ESheet sheet, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
+            String name, MimeImage itemImage, DND5ERarity rarity, Double weight, Integer quantity, Integer costMR, String description,
             Integer caEffect, Integer lifeEffect, Integer loadEffect, Double lifeEffectPercentage, Double loadEffectPercentage, String otherEffects, Boolean isEquipped,
             String weaponCategory, String properties
     ) {
-        super(name, sheet, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.WEAPON, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
+        super(name, itemImage, rarity, weight, quantity, costMR, description, DND5EEquipmentCategory.WEAPON, caEffect, lifeEffect, loadEffect, lifeEffectPercentage, loadEffectPercentage, otherEffects, isEquipped);
         WebTRPGLogger.getLogger().debug(this.getClass().getName());
         this.weaponCategory = weaponCategory != null ? weaponCategory : "";
         this.properties = properties != null ? properties : "";
