@@ -2,13 +2,16 @@ package it.italiandudes.webtrpg.core.data;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.security.dto.RegisterDTO;
+import it.italiandudes.webtrpg.core.security.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import it.italiandudes.webtrpg.core.security.enums.UserRole;
 
 import java.util.Objects;
 
