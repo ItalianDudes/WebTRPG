@@ -31,18 +31,18 @@ public class DND5ESheet extends AuditableEntity {
 
     // Tabs
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_character_id", nullable = false) private DND5ESheetTabCharacter tabCharacter = DND5ESheetTabCharacter.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_ability_id", nullable = false) private DND5ESheetTabAbility tabAbility = DND5ESheetTabAbility.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_proficiencies_id", nullable = false) private DND5ESheetTabProficiencies tabProficiencies = DND5ESheetTabProficiencies.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_language_proficiencies_id", nullable = false) private DND5ESheetTabLanguageProficiencies tabLanguageProficiencies = DND5ESheetTabLanguageProficiencies.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_privileges_and_traits_id", nullable = false) private DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits = DND5ESheetTabPrivilegesAndTraits.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_equipment_id", nullable = false) private DND5ESheetTabEquipment tabEquipment = DND5ESheetTabEquipment.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_inventory_id", nullable = false) private DND5ESheetTabInventory tabInventory = DND5ESheetTabInventory.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_spells_id", nullable = false) private DND5ESheetTabSpells tabSpells = DND5ESheetTabSpells.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_physical_description_id", nullable = false) private DND5ESheetTabPhysicalDescription tabPhysicalDescription = DND5ESheetTabPhysicalDescription.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_story_id", nullable = false) private DND5ESheetTabStory tabStory = DND5ESheetTabStory.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_notes_id", nullable = false) private DND5ESheetTabNotes tabNotes = DND5ESheetTabNotes.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_status_effects_id", nullable = false) private DND5ESheetTabStatusEffects tabStatusEffects = DND5ESheetTabStatusEffects.builder().build();
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_dice_roller_id", nullable = false) private DND5ESheetTabDiceRoller tabDiceRoller = DND5ESheetTabDiceRoller.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_ability_id", nullable = false) private DND5ESheetTabAbility tabAbility = DND5ESheetTabAbility.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_proficiencies_id", nullable = false) private DND5ESheetTabProficiencies tabProficiencies = DND5ESheetTabProficiencies.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_language_proficiencies_id", nullable = false) private DND5ESheetTabLanguageProficiencies tabLanguageProficiencies = DND5ESheetTabLanguageProficiencies.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_privileges_and_traits_id", nullable = false) private DND5ESheetTabPrivilegesAndTraits tabPrivilegesAndTraits = DND5ESheetTabPrivilegesAndTraits.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_equipment_id", nullable = false) private DND5ESheetTabEquipment tabEquipment = DND5ESheetTabEquipment.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_inventory_id", nullable = false) private DND5ESheetTabInventory tabInventory = DND5ESheetTabInventory.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_spells_id", nullable = false) private DND5ESheetTabSpells tabSpells = DND5ESheetTabSpells.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_physical_description_id", nullable = false) private DND5ESheetTabPhysicalDescription tabPhysicalDescription = DND5ESheetTabPhysicalDescription.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_story_id", nullable = false) private DND5ESheetTabStory tabStory = DND5ESheetTabStory.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_notes_id", nullable = false) private DND5ESheetTabNotes tabNotes = DND5ESheetTabNotes.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_status_effects_id", nullable = false) private DND5ESheetTabStatusEffects tabStatusEffects = DND5ESheetTabStatusEffects.builder().build();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false) @JoinColumn(name = "tab_dice_roller_id", nullable = false) private DND5ESheetTabDiceRoller tabDiceRoller = DND5ESheetTabDiceRoller.builder().build();
 
     // Constructors
     @Builder

@@ -32,7 +32,7 @@ public class DND5ESheetTabSpells extends AuditableEntity {
     @Transient private int spellAttackBonus = 0;
 
     // Learned Spells
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ESpell> learnedSpells = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ESpell> learnedSpells = new ArrayList<>();
 
     // Slots
     @Transient private final List<DND5ESpell> lvl0Spells = new ArrayList<>();

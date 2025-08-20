@@ -26,7 +26,7 @@ public class DND5ESheetTabDiceRoller extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Proficiencies
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EDiceRoll> diceRolls = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EDiceRoll> diceRolls = new ArrayList<>();
 
     // Constructors
     @Builder

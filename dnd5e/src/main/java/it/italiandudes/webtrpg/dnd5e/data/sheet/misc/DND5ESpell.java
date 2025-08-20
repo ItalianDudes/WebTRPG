@@ -29,7 +29,7 @@ public class DND5ESpell extends AuditableEntity {
     @Column(name = "name", nullable = false) private String name = "";
     @Column(name = "is_prepared", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE") private boolean isPrepared = false;
     @Column(name = "rarity", nullable = false) @Enumerated(EnumType.STRING) private DND5ERarity rarity = DND5ERarity.COMMON;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "spell_image_id") private MimeImage spellImage = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "spell_image_id") private MimeImage spellImage = null;
     @Column(name = "spell_level", nullable = false, columnDefinition = "INT DEFAULT 0") private int spellLevel = 0;
     @Column(name = "category", nullable = false) @Enumerated(EnumType.STRING) private DND5ESpellCategory category = DND5ESpellCategory.ABJURATION;
     @Column(name = "type", nullable = false) private String type = "";

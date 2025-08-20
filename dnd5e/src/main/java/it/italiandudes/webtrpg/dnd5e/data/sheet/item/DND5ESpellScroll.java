@@ -21,7 +21,7 @@ import java.util.Objects;
 public class DND5ESpellScroll extends DND5EItem {
 
     // SpellScroll Data
-    @OneToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "spell_id", nullable = false) private DND5ESpell spell;
+    @OneToOne(fetch = FetchType.LAZY, optional = false) @JoinColumn(name = "spell_id", nullable = false) private DND5ESpell spell;
     @Column(name = "is_usable", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE") private boolean isUsable = true;
     @Column(name = "are_components_required", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE") private boolean areComponentsRequired = false;
     @Column(name = "is_learnable", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE") private boolean isLearnable = true;

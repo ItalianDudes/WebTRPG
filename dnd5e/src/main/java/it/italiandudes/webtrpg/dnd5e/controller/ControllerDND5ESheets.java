@@ -69,10 +69,7 @@ public final class ControllerDND5ESheets {
         if (optCampaign.isPresent()) {
             model.addAttribute("campaign", optCampaign.get());
             Optional<DND5ESheet> optSheet = sheetRepository.findById(sheetID);
-            optSheet.ifPresent(sheet -> {
-                System.err.println(sheet.getTabProficiencies().getWeapons());
-                model.addAttribute("sheet", sheet);
-            });
+            optSheet.ifPresent(sheet -> model.addAttribute("sheet", sheet));
         }
         return "dnd5e/sheet";
     }

@@ -24,40 +24,40 @@ public class DND5ESheetTabEquipment extends AuditableEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
     // Armors
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "full_set_id", referencedColumnName = "id") private DND5EArmor fullSet = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "head_id", referencedColumnName = "id") private DND5EArmor head = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_shoulder_id", referencedColumnName = "id") private DND5EArmor leftShoulder = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_shoulder_id", referencedColumnName = "id") private DND5EArmor rightShoulder = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_arm_id", referencedColumnName = "id") private DND5EArmor leftArm = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_arm_id", referencedColumnName = "id") private DND5EArmor rightArm = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_forearm_id", referencedColumnName = "id") private DND5EArmor leftForearm = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_forearm_id", referencedColumnName = "id") private DND5EArmor rightForearm = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_hand_id", referencedColumnName = "id") private DND5EArmor leftHand = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_hand_id", referencedColumnName = "id") private DND5EArmor rightHand = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "chest_id", referencedColumnName = "id") private DND5EArmor chest = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "back_id", referencedColumnName = "id") private DND5EArmor back = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "abdomen_id", referencedColumnName = "id") private DND5EArmor abdomen = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_leg_id", referencedColumnName = "id") private DND5EArmor leftLeg = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_leg_id", referencedColumnName = "id") private DND5EArmor rightLeg = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_knee_id", referencedColumnName = "id") private DND5EArmor leftKnee = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_knee_id", referencedColumnName = "id") private DND5EArmor rightKnee = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_foot_id", referencedColumnName = "id") private DND5EArmor leftFoot = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_foot_id", referencedColumnName = "id") private DND5EArmor rightFoot = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "full_set_id", referencedColumnName = "id") private DND5EArmor fullSet = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "head_id", referencedColumnName = "id") private DND5EArmor head = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_shoulder_id", referencedColumnName = "id") private DND5EArmor leftShoulder = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_shoulder_id", referencedColumnName = "id") private DND5EArmor rightShoulder = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_arm_id", referencedColumnName = "id") private DND5EArmor leftArm = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_arm_id", referencedColumnName = "id") private DND5EArmor rightArm = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_forearm_id", referencedColumnName = "id") private DND5EArmor leftForearm = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_forearm_id", referencedColumnName = "id") private DND5EArmor rightForearm = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_hand_id", referencedColumnName = "id") private DND5EArmor leftHand = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_hand_id", referencedColumnName = "id") private DND5EArmor rightHand = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "chest_id", referencedColumnName = "id") private DND5EArmor chest = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "back_id", referencedColumnName = "id") private DND5EArmor back = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "abdomen_id", referencedColumnName = "id") private DND5EArmor abdomen = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_leg_id", referencedColumnName = "id") private DND5EArmor leftLeg = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_leg_id", referencedColumnName = "id") private DND5EArmor rightLeg = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_knee_id", referencedColumnName = "id") private DND5EArmor leftKnee = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_knee_id", referencedColumnName = "id") private DND5EArmor rightKnee = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_foot_id", referencedColumnName = "id") private DND5EArmor leftFoot = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_foot_id", referencedColumnName = "id") private DND5EArmor rightFoot = null;
 
     // Addons
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "necklace_id", referencedColumnName = "id") private DND5EAddon necklace = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "mantle_id", referencedColumnName = "id") private DND5EAddon mantle = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "backpack_id", referencedColumnName = "id") private DND5EAddon backpack = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "bandolier_id", referencedColumnName = "id") private DND5EAddon bandolier = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "belt_id", referencedColumnName = "id") private DND5EAddon belt = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_earring_id", referencedColumnName = "id") private DND5EAddon leftEarring = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_earring_id", referencedColumnName = "id") private DND5EAddon rightEarring = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "left_bracelet_id", referencedColumnName = "id") private DND5EAddon leftBracelet = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "right_bracelet_id", referencedColumnName = "id") private DND5EAddon rightBracelet = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "ring1_id", referencedColumnName = "id") private DND5EAddon ring1 = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "ring2_id", referencedColumnName = "id") private DND5EAddon ring2 = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "ring3_id", referencedColumnName = "id") private DND5EAddon ring3 = null;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "ring4_id", referencedColumnName = "id") private DND5EAddon ring4 = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "necklace_id", referencedColumnName = "id") private DND5EAddon necklace = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "mantle_id", referencedColumnName = "id") private DND5EAddon mantle = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "backpack_id", referencedColumnName = "id") private DND5EAddon backpack = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "bandolier_id", referencedColumnName = "id") private DND5EAddon bandolier = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "belt_id", referencedColumnName = "id") private DND5EAddon belt = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_earring_id", referencedColumnName = "id") private DND5EAddon leftEarring = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_earring_id", referencedColumnName = "id") private DND5EAddon rightEarring = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "left_bracelet_id", referencedColumnName = "id") private DND5EAddon leftBracelet = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "right_bracelet_id", referencedColumnName = "id") private DND5EAddon rightBracelet = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "ring1_id", referencedColumnName = "id") private DND5EAddon ring1 = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "ring2_id", referencedColumnName = "id") private DND5EAddon ring2 = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "ring3_id", referencedColumnName = "id") private DND5EAddon ring3 = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "ring4_id", referencedColumnName = "id") private DND5EAddon ring4 = null;
 
     // Constructors
     @Builder

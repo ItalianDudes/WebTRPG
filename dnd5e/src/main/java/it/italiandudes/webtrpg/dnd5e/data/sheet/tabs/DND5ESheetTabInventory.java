@@ -40,7 +40,7 @@ public class DND5ESheetTabInventory extends AuditableEntity {
     @Column(name = "mp", nullable = false, columnDefinition = "INT DEFAULT 0") private int mp = 0;
 
     // Items
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EItem> items = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EItem> items = new ArrayList<>();
 
     // Constructors
     @Builder

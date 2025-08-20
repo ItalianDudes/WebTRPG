@@ -36,7 +36,7 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     @Column(name = "race", nullable = false) private String race = "";
     @Column(name = "alignment", nullable = false) private String alignment = "";
     @Min(0) @Column(name = "exp", columnDefinition = "INT DEFAULT 0", nullable = false) private int exp = 0;
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
 
     // Life
     // @Builder.Default @Min(1) @Transient private int calculatedMaxHP = 1;

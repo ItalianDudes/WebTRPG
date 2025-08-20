@@ -26,7 +26,7 @@ public class DND5ESheetTabStory extends AuditableEntity {
     // Sheet Header
     @Column(name = "story", nullable = false) private String story = "";
     @Column(name = "cult", nullable = false) private String cult = "";
-    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "cult_image_id") private MimeImage cultImage = null;
+    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "cult_image_id") private MimeImage cultImage = null;
     @Column(name = "allies_and_organizations", nullable = false) private String alliesAndOrganizations = "";
 
     // Constructor
