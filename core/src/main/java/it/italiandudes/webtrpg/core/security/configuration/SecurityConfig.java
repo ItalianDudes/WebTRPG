@@ -4,8 +4,10 @@ import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
 import it.italiandudes.webtrpg.core.security.filter.UserExistenceFilter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.filter.UrlHandlerFilter;
 
 import java.sql.DatabaseMetaData;
 
@@ -50,6 +53,14 @@ public class SecurityConfig {
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
+    }
+    @Bean
+    public FilterRegistrationBean<UrlHandlerFilter> trailingSlashRedirect() { // Translates 'urls/' to 'urls'
+        UrlHandlerFilter filter = UrlHandlerFilter.trailingSlashHandler("/**")
+                .redirect(HttpStatus.PERMANENT_REDIRECT).build();
+        FilterRegistrationBean<UrlHandlerFilter> registrationBean = new FilterRegistrationBean<>(filter);
+        registrationBean.setOrder(0);
+        return registrationBean;
     }
 
     // Constructors
