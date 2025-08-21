@@ -9,22 +9,77 @@
             <p style="text-align: center"><a th:href="@{'/dnd5e/campaigns/' + ${campaign.id} + '/sheets'}">TORNA ALLA LISTA SCHEDE</a></p>
             <p style="text-align: center"><a href="/dnd5e/campaigns">TORNA ALLA LISTA CAMPAGNE</a></p>
         </div>
-        <div th:if="${sheet != null}">
-            <p th:text="${sheet.toString()}"></p>
-            <ul th:each="item : ${sheet.getTabEquipment().getSheet().getTabInventory().getItems()}">
-                <li><p th:text="${item.toString()}"></p></li>
-            </ul>
-            <br/><br/>
-            <div th:text="${sheet.getTabEquipment().updateEquippedPieces()}"></div>
-            <ul th:each="item : ${sheet.getTabEquipment().getEquippedArmors()}">
-                <li><p th:text="${item.toString()}"></p></li>
-            </ul>
-            <ul th:each="item : ${sheet.getTabEquipment().getEquippedAddons()}">
-                <li><p th:text="${item.toString()}"></p></li>
-            </ul>
-            <ul th:each="item : ${sheet.getTabEquipment().getEquippedWeapons()}">
-                <li><p th:text="${item.toString()}"></p></li>
-            </ul>
+        <div th:if="${sheet != null}" th:with="baseURL=@{'/dnd5e/campaigns/' + ${sheet.getCampaign().getId()} + '/sheets/' + ${sheet.getId()} + '/'}">
+            <aside id="sidebar" class="sidebar">
+                <a href="#"
+                   class="tab-link active"
+                   hx-get="${baseURL}+'tab/character'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Personaggio</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/ability'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Abilità</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/proficiencies'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Competenze</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/language-proficiencies'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Linguaggi</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/privileges-and-traits'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Privilegi & Tratti</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/equipment'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Equipaggiamento</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/inventory'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Inventario</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/spells'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Incantesimi</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/physical-description'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Descrizione Fisica</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/story'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Storia</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/notes'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Note</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/status-effects'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Effetti di Stato</a>
+
+                <a href="#" class="tab-link"
+                   hx-get="${baseURL}+'tab/dice-roller'"
+                   hx-target="#tab-content"
+                   hx-trigger="click">Dadi</a>
+            </aside>
+            <main>
+                <section id="tab-content"></section>
+            </main>
         </div>
     </div>
 </html>

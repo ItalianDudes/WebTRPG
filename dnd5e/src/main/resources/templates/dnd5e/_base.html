@@ -5,9 +5,11 @@
         <link rel="icon" type="image/x-icon" th:href="@{/dnd5e/favicon.ico}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/dnd5e/css/style.css}"/>
         <title layout:fragment="title">D&D5E-WebTRPG</title>
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     </head>
     <body>
         <header class="dnd5e-header">
+            <button aria-label="Apri menu" id="menu-toggle" class="menu-toggle">☰</button>
             <a href="/dnd5e">
                 <img th:src="@{/dnd5e/favicon.ico}" th:href="@{'/dnd5e/'}" class="logo" title="Menu Principale" alt="WebTRPG"/>
             </a>
@@ -28,5 +30,26 @@
         <footer class="dnd5e-footer">
             <p>Ideato da Wizard of the Coasts. Personalizzato, progettato e scritto da <a href="https://github.com/Hacker6329">Hacker6329</a>, <a href="https://github.com/ItalianDudes">ItalianDudes</a></p>
         </footer>
+        <script>
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('menu-toggle');
+
+            toggleButton.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+
+            document.body.addEventListener('click', e => {
+                if (!sidebar.contains(e.target) && e.target !== toggleButton) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            document.body.addEventListener('htmx:afterOnLoad', evt => {
+                document.querySelectorAll('.tab-link').forEach(a => a.classList.remove('active'));
+                if (evt.detail.elt?.classList?.contains('tab-link')) {
+                    evt.detail.elt.classList.add('active');
+                }
+            });
+        </script>
     </body>
 </html>

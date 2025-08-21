@@ -413,6 +413,7 @@ body::before {
 
 .dnd5e-header img.logo {
     height: calc(var(--header-height) - 10px);
+    padding-left: 4rem;
     object-fit: contain;
     transition: transform 0.3s ease;
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
@@ -437,3 +438,49 @@ body::before {
     cursor: pointer;
 }
 
+.dnd5e-header .menu-toggle {
+    position: fixed;
+    border-radius: 3px;
+    background: transparent;
+    font-size: 1rem;
+    cursor:pointer;
+    z-index: 1000;
+}
+.dnd5e-header .menu-toggle.is-open {
+    transform: rotate(90deg);
+}
+.sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left:0;
+    bottom: var(--footer-height);
+    width: 16rem;
+    background: var(--background);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+#sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+#sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 4px;
+}
+#sidebar::-webkit-scrollbar-track {
+    background-color: var(--hover-bg);
+}
+.sidebar.open {
+    transform: translateX(0);
+}
+.tab-link {
+    display:block;
+    padding:0.75rem 1rem;
+}
+.tab-link.active {
+    background: var(--surface);
+}
+.sidebar.open ~ main {
+    margin-left:16rem;
+}
