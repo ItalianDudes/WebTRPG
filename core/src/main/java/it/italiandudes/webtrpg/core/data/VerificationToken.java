@@ -27,7 +27,7 @@ public class VerificationToken extends AuditableEntity {
 
     // Attributes
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) @JoinColumn(name = "user_id", nullable = false) private User user;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false) @JoinColumn(name = "user_id", nullable = false) private User user;
     @Size(min = 36, max = 36) @Column(name = "token", unique = true, nullable = false, updatable = false) private String token = UUID.randomUUID().toString();
     @Future @Column(name = "expiry_date", nullable = false, updatable = false) private LocalDateTime expiryDate = LocalDateTime.now().plusWeeks(2);
     @Column(name = "token_type", nullable = false, updatable = false) @Enumerated(EnumType.STRING) private VerificationTokenType type;

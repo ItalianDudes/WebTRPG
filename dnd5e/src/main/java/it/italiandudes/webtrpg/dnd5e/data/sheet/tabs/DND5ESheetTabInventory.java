@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.item.DND5EItem;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -27,6 +28,9 @@ public class DND5ESheetTabInventory extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabInventory", optional = false) private DND5ESheet sheet;
+
     // Weight
     @Transient private double currentLoad = 0;
     @Transient private double maxLoad = 0;
@@ -40,7 +44,7 @@ public class DND5ESheetTabInventory extends AuditableEntity {
     @Column(name = "mp", nullable = false, columnDefinition = "INT DEFAULT 0") private int mp = 0;
 
     // Items
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EItem> items = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EItem> items = new ArrayList<>();
 
     // Constructors
     @Builder

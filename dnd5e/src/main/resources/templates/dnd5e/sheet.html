@@ -11,6 +11,20 @@
         </div>
         <div th:if="${sheet != null}">
             <p th:text="${sheet.toString()}"></p>
+            <ul th:each="item : ${sheet.getTabEquipment().getSheet().getTabInventory().getItems()}">
+                <li><p th:text="${item.toString()}"></p></li>
+            </ul>
+            <br/><br/>
+            <div th:text="${sheet.getTabEquipment().updateEquippedPieces()}"></div>
+            <ul th:each="item : ${sheet.getTabEquipment().getEquippedArmors()}">
+                <li><p th:text="${item.toString()}"></p></li>
+            </ul>
+            <ul th:each="item : ${sheet.getTabEquipment().getEquippedAddons()}">
+                <li><p th:text="${item.toString()}"></p></li>
+            </ul>
+            <ul th:each="item : ${sheet.getTabEquipment().getEquippedWeapons()}">
+                <li><p th:text="${item.toString()}"></p></li>
+            </ul>
         </div>
     </div>
 </html>

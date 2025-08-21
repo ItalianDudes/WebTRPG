@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.misc.DND5EDiceRoll;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -25,8 +26,11 @@ public class DND5ESheetTabDiceRoller extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabDiceRoller", optional = false) private DND5ESheet sheet;
+
     // Proficiencies
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EDiceRoll> diceRolls = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EDiceRoll> diceRolls = new ArrayList<>();
 
     // Constructors
     @Builder

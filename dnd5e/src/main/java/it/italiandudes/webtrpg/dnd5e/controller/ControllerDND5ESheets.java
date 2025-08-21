@@ -45,8 +45,6 @@ public final class ControllerDND5ESheets {
             sheet.getTabProficiencies().getWeapons().add(new DND5EWeaponProficiency("TESTER SPADA PT2", DND5EProficiencyLevel.MASTERY));
             sheet.getTabDiceRoller().getDiceRolls().add(new DND5EDiceRoll(12, RandomNumberGenerator.randomBetweenBoundsIncluded(1, 12)));
             sheetRepository.save(sheet);
-            // sheet.getTabDiceRoller().getDiceRolls().add(new DND5EDiceRoll(10, RandomNumberGenerator.randomBetweenBoundsIncluded(1, 10)));
-            // sheetRepository.save(sheet);
 
             sheet.getTabInventory().getItems().add(new DND5EItem("TESTER ITEM", DND5EItemCategory.ITEM, null, DND5ERarity.EXOTIC, 1.5, 1, 1, "Tester Description"));
             sheet.getTabInventory().getItems().add(new DND5EArmor("TESTER ARMOR", null, DND5ERarity.EXOTIC, 56.1, 5, 12, "TESTER DESC", 1, 8, 5, 8.64, 3.5, "TESTER BELLO", true, DND5EArmorSlot.CHEST, DND5EWearableWeightCategory.HEAVY));

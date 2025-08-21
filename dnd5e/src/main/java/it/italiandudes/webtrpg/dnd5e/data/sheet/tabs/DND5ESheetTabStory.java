@@ -3,6 +3,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,10 +24,13 @@ public class DND5ESheetTabStory extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabStory", optional = false) private DND5ESheet sheet;
+
     // Sheet Header
     @Column(name = "story", nullable = false) private String story = "";
     @Column(name = "cult", nullable = false) private String cult = "";
-    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "cult_image_id") private MimeImage cultImage = null;
+    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "cult_image_id") private MimeImage cultImage = null;
     @Column(name = "allies_and_organizations", nullable = false) private String alliesAndOrganizations = "";
 
     // Constructor

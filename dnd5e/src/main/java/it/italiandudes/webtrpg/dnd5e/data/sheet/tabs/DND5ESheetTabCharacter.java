@@ -3,6 +3,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.data.MimeImage;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -28,6 +29,9 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabCharacter", optional = false) private DND5ESheet sheet;
+
     // Sheet Header
     @Column(name = "character_name", nullable = false) private String characterName = "";
     @Min(1) @Column(name = "level", columnDefinition = "INT DEFAULT 1", nullable = false) private int level = 1;
@@ -36,7 +40,7 @@ public class DND5ESheetTabCharacter extends AuditableEntity {
     @Column(name = "race", nullable = false) private String race = "";
     @Column(name = "alignment", nullable = false) private String alignment = "";
     @Min(0) @Column(name = "exp", columnDefinition = "INT DEFAULT 0", nullable = false) private int exp = 0;
-    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
+    @OneToOne(fetch = FetchType.EAGER) @JoinColumn(name = "character_image_id") private MimeImage characterImage = null;
 
     // Life
     // @Builder.Default @Min(1) @Transient private int calculatedMaxHP = 1;

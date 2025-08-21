@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.misc.DND5EClassPrivilege;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.misc.DND5ETrait;
 import jakarta.persistence.*;
@@ -26,9 +27,12 @@ public class DND5ESheetTabPrivilegesAndTraits extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabPrivilegesAndTraits", optional = false) private DND5ESheet sheet;
+
     // Privileges & Traits
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EClassPrivilege> classPrivileges = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ETrait> traits = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5EClassPrivilege> classPrivileges = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ETrait> traits = new ArrayList<>();
 
     // Constructors
     @Builder

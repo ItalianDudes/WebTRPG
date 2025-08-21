@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,9 @@ public class DND5ESheetTabPhysicalDescription extends AuditableEntity {
 
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabPhysicalDescription", optional = false) private DND5ESheet sheet;
 
     // Sheet Header
     @Column(name = "age", nullable = false) private String age = "";

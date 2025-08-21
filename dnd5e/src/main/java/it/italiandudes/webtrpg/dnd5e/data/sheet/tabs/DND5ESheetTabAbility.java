@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EProficiencyLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -25,6 +26,9 @@ public class DND5ESheetTabAbility extends AuditableEntity {
 
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabAbility", optional = false) private DND5ESheet sheet;
 
     // Main Abilities
     @Min(0) @Column(name = "score_strength", columnDefinition = "INT DEFAULT 8", nullable = false) private int strength = 8;

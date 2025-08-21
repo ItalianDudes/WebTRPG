@@ -2,6 +2,7 @@ package it.italiandudes.webtrpg.dnd5e.data.sheet.tabs;
 
 import it.italiandudes.webtrpg.core.audit.AuditableEntity;
 import it.italiandudes.webtrpg.core.logging.WebTRPGLogger;
+import it.italiandudes.webtrpg.dnd5e.data.sheet.DND5ESheet;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.enums.DND5EMainAbilities;
 import it.italiandudes.webtrpg.dnd5e.data.sheet.misc.DND5ESpell;
 import jakarta.persistence.*;
@@ -26,13 +27,16 @@ public class DND5ESheetTabSpells extends AuditableEntity {
     // Entity ID
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 
+    // Sheet Reference
+    @OneToOne(mappedBy = "tabSpells", optional = false) private DND5ESheet sheet;
+
     // Header
     @Column(name = "caster_ability", nullable = false, columnDefinition = "VARCHAR(32) DEFAULT 'INTELLIGENCE'") @Enumerated(EnumType.STRING) private DND5EMainAbilities casterAbility;
     @Transient private int spellST = 0;
     @Transient private int spellAttackBonus = 0;
 
     // Learned Spells
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ESpell> learnedSpells = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) @JoinColumn(name = "sheet_id", nullable = false) private List<DND5ESpell> learnedSpells = new ArrayList<>();
 
     // Slots
     @Transient private final List<DND5ESpell> lvl0Spells = new ArrayList<>();
