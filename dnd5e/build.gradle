@@ -16,6 +16,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
+    // HTMX
+    implementation 'io.github.wimdeblauwe:htmx-spring-boot:4.0.1'
+
     // Thymeleaf
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
 }
