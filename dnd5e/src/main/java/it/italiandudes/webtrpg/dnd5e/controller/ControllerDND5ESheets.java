@@ -71,4 +71,72 @@ public final class ControllerDND5ESheets {
         }
         return "dnd5e/sheet";
     }
+    @GetMapping("/dnd5e/campaigns/{campaign-id}/sheets/{sheet-id}/tab/{tab-name}")
+    private String getSheetTab(@PathVariable(name = "campaign-id") Long campaignID, @PathVariable(name = "sheet-id") Long sheetID, @PathVariable(name = "tab-name") String tabName, Model model) {
+        Optional<DND5ECampaign> optCampaign = campaignRepository.findById(campaignID);
+        if (optCampaign.isPresent()) {
+            model.addAttribute("campaign", optCampaign.get());
+            Optional<DND5ESheet> optSheet = sheetRepository.findById(sheetID);
+            if (optSheet.isPresent()) {
+                model.addAttribute("sheet", optSheet.get());
+                switch (tabName) {
+                    case "character" -> {
+                        return "dnd5e/tabs/tab-character";
+                    }
+
+                    case "ability" -> {
+                        return "dnd5e/tabs/tab-ability";
+                    }
+
+                    case "proficiencies" -> {
+                        return "dnd5e/tabs/tab-proficiencies";
+                    }
+
+                    case "language-proficiencies" -> {
+                        return "dnd5e/tabs/tab-language-proficiencies";
+                    }
+
+                    case "privileges-and-traits" -> {
+                        return "dnd5e/tabs/tab-privileges-and-traits";
+                    }
+
+                    case "equipment" -> {
+                        return "dnd5e/tabs/tab-equipment";
+                    }
+
+                    case "inventory" -> {
+                        return "dnd5e/tabs/tab-inventory";
+                    }
+
+                    case "spells" -> {
+                        return "dnd5e/tabs/tab-spells";
+                    }
+
+                    case "physical-description" -> {
+                        return "dnd5e/tabs/tab-physical-description";
+                    }
+
+                    case "story" -> {
+                        return "dnd5e/tabs/tab-story";
+                    }
+
+                    case "notes" -> {
+                        return "dnd5e/tabs/tab-notes";
+                    }
+
+                    case "status-effects" -> {
+                        return "dnd5e/tabs/tab-status-effects";
+                    }
+
+                    case "dice-roller" -> {
+                        return "dnd5e/tabs/tab-dice-roller";
+                    }
+
+                    case null, default -> {
+                        return "dnd5e/sheet";
+                    }
+                }
+            } else return "dnd5e/sheet";
+        } else return "dnd5e/sheet";
+    }
 }
