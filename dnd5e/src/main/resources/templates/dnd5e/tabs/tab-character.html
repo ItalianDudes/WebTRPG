@@ -1,1 +1,104 @@
-<h1>TESTER CHARACTER</h1>
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+    <div class="sheet-tab-character-header-container">
+        <span>
+            <label>Nome Personaggio</label>
+            <input class="sheet-tab-character-name" type="text" th:text="${sheet.getTabCharacter().getCharacterName()}"/>
+        </span>
+        <span>
+            <label>Classe<input type="text" th:value="${sheet.getTabCharacter().getCharacterClass()}"/></label>
+            <label style="flex: 0 0 7.5%;">Livello<input type="number" min="1" th:value="${sheet.getTabCharacter().getLevel()}"/></label>
+            <label>Background<input type="text" th:value="${sheet.getTabCharacter().getBackground()}"/></label>
+            <label>Nome Giocatore<input type="text" th:value="${sheet.getOwner().getUsername()}" readonly/></label>
+        </span>
+        <span>
+            <label>Razza<input type="text" th:value="${sheet.getTabCharacter().getRace()}"/></label>
+            <label>Allineamento<input type="text" th:value="${sheet.getTabCharacter().getAlignment()}"/></label>
+            <label>Punti Esperienza<input type="number" min="0" th:value="${sheet.getTabCharacter().getExp()}"/></label>
+        </span>
+    </div>
+    <div class="sheet-tab-character-body-container">
+        <span style="display: flex;width: 100%;margin: 0;padding: 0;">
+            <div class="sheet-tab-character-ac-container">
+                <img class="sheet-tab-character-ac" th:src="@{/dnd5e/images/sheet/character/ac.png}">
+                <img class="sheet-tab-character-ac-full" th:src="@{/dnd5e/images/sheet/character/ac_full.png}">
+                <div id="sheet-tab-character-ac-value" class="sheet-tab-character-ac-perc">15</div>
+                <div style="position: absolute;top: 93%;left: 46%">CA</div>
+            </div>
+            <div class="sheet-tab-character-health-container">
+                <img class="sheet-tab-character-health" th:src="@{/dnd5e/images/sheet/character/health.png}">
+                <img class="sheet-tab-character-health-full" th:src="@{/dnd5e/images/sheet/character/health_full.png}">
+                <div class="sheet-tab-character-health-perc">100%</div>
+                <div style="position: absolute;top: 93%;left: 46%">HP</div>
+            </div>
+            <div class="sheet-tab-character-life">
+                <span>
+                    <label>Punti Ferita Massimi Calcolati<input type="number" id="maxHP" th:value="${sheet.getTabCharacter().getMaxHP()}" readonly/></label>
+                </span>
+                <span>
+                    <label>Massimo dei Punti Ferita<input type="number" th:value="${sheet.getTabCharacter().getMaxHP()}"/></label>
+                </span>
+                <span>
+                    <label>Punti Ferita Attuali<input type="number" id="currentHP" th:value="${sheet.getTabCharacter().getCurrentHP()}"/></label>
+                </span>
+                <span>
+                    <label>Punti Ferita Temporanei<input type="number" th:value="${sheet.getTabCharacter().getTempHP()}"/></label>
+                </span>
+                <span>
+                    <label>Dadi Vita Attuali<span>
+                        <label>d<input type="number" th:value="${sheet.getTabCharacter().getLifeDiceFaces()}"/></label>
+                        <label><input type="number" th:value="${sheet.getTabCharacter().getLifeDiceCurrentAmount()}"/></label>
+                    </span></label>
+                </span>
+                <span>
+                    <label>Dadi Vita Totali<span>
+                        <label>d<input type="number" th:value="${sheet.getTabCharacter().getLifeDiceFaces()}" readonly/></label>
+                        <label><input type="number" th:value="${sheet.getTabCharacter().getLifeDiceTotalAmount()}" readonly/></label>
+                    </span></label>
+                </span>
+            </div>
+        </span>
+        <span>
+            <div style="position: relative" class="sheet-tab-character-image-container">
+                <img class="sheet-tab-character-image" th:src="@{/dnd5e/favicon.ico}">
+                <div style="position: absolute;top: 89%;left: 40%">ASPETTO</div>
+            </div>
+            <div style="display: block">
+                <span></span>
+                <span>
+                    <div class="sheet-tab-character-text-areas-container">
+                        <span>
+                            <label class="sheet-tab-character-text-area-label">Tratti Caratteriali<textarea class="sheet-tab-character-text-area" th:text="${sheet.getTabCharacter().getPersonalTraits()}"></textarea></label>
+                            <label class="sheet-tab-character-text-area-label">Legami<textarea class="sheet-tab-character-text-area" th:text="${sheet.getTabCharacter().getBonds()}"></textarea></label>
+                        </span>
+                        <span>
+                            <label class="sheet-tab-character-text-area-label">Ideali<textarea class="sheet-tab-character-text-area" th:text="${sheet.getTabCharacter().getIdeals()}"></textarea></label>
+                            <label class="sheet-tab-character-text-area-label">Difetti<textarea class="sheet-tab-character-text-area" th:text="${sheet.getTabCharacter().getFlaws()}"></textarea></label>
+                        </span>
+                    </div>
+                </span>
+            </div>
+        </span>
+    </div>
+    <script>
+        function updateHeartPercentage() {
+            const maxHP = parseInt(document.getElementById('maxHP').value);
+            const currentHP = parseInt(document.getElementById('currentHP').value);
+            const heart = document.querySelector('.sheet-tab-character-health-full');
+            const textPerc = document.querySelector('.sheet-tab-character-health-perc');
+
+            if (isNaN(maxHP) || isNaN(currentHP) || maxHP === 0) return;
+
+            const percentage = Math.max(0, Math.round((currentHP / maxHP) * 100));
+            const hearthPercentage = Math.min(percentage, 100);
+            heart.style.clipPath = `inset(${100 - hearthPercentage}% 0 0 0)`;
+            if (percentage > 500) textPerc.textContent = `>500%`;
+            else textPerc.textContent = `${percentage}%`;
+        }
+
+        // Value Change Listeners
+        document.getElementById('currentHP').addEventListener('input', updateHeartPercentage);
+        window.addEventListener('DOMContentLoaded', updateHeartPercentage);
+    </script>
+</html>

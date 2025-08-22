@@ -66,8 +66,7 @@ body {
 
 /* 5) Page Content */
 .page-content {
-    padding: 2rem;
-    padding-bottom: var(--footer-height);
+    padding: 2rem 2rem var(--footer-height);
 }
 
 /* 6) Headings */
@@ -167,6 +166,7 @@ input[type="radio"]:focus {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 textarea,
 select {
     background-color: var(--surface);
@@ -178,12 +178,18 @@ select {
     font-family: inherit;
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+    filter: invert(65%) sepia(98%) saturate(325%) hue-rotate(4deg) brightness(91%) contrast(89%);
+}
+
 input[type="text"]:hover,
 input[type="email"]:hover,
 input[type="password"]:hover,
+input[type="number"]:hover,
 textarea:hover,
 select:hover,
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 textarea:focus,
@@ -483,4 +489,185 @@ body::before {
 }
 .sidebar.open ~ main {
     margin-left:16rem;
+}
+
+#tab-content {
+    width: 100%;
+    height: 100%;
+}
+
+/* All Sheets */
+#tab-content input {
+    border-radius: 4px;
+}
+
+#tab-content span {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+}
+
+#tab-content span label {
+    flex: 1;
+    display: flex;
+}
+
+#tab-content span label input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Sheet Tab Character */
+.sheet-tab-character-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sheet-tab-character-header-container,
+.sheet-tab-character-body-container {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    border: 3px solid black;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.sheet-tab-character-image {
+    padding: 5px 15px 15px 15px;
+    border: 3px solid black;
+    border-radius: 4px;
+}
+
+.sheet-tab-character-header-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.sheet-tab-character-header-container span label {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    gap: 0;
+}
+
+/* AC */
+.sheet-tab-character-ac-container {
+    position: relative;
+    align-content: center;
+    border: 3px solid black;
+    border-radius: 4px;
+    margin: 5px 2px 5px 0;
+    padding: 5px;
+}
+
+.sheet-tab-character-ac {
+    position: relative;
+    left: 0;
+    width: 18rem;
+}
+
+.sheet-tab-character-image {
+    width: 19rem;
+    height: auto;
+}
+
+.sheet-tab-character-ac-full {
+    position: absolute;
+    left: 5px;
+    width: 18rem;
+}
+
+.sheet-tab-character-ac-full {
+    clip-path: inset(50% 0 0 0); /* a metà */
+    transition: clip-path 0.5s ease;
+}
+
+.sheet-tab-character-ac-perc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+/* HEALTH */
+.sheet-tab-character-health-container {
+    position: relative;
+    align-content: center;
+    border: 3px solid black;
+    border-radius: 4px;
+    margin: 5px 2px 5px 0;
+    padding: 5px;
+}
+
+.sheet-tab-character-health {
+    position: relative;
+    left: 0;
+    width: 18rem;
+}
+
+.sheet-tab-character-health-full {
+    position: absolute;
+    left: 5px;
+    width: 18rem;
+}
+
+.sheet-tab-character-health-full {
+    clip-path: inset(0% 0 0 0);
+    transition: clip-path 0.5s ease;
+}
+
+.sheet-tab-character-health-perc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+/* LIFE  */
+.sheet-tab-character-life {
+    flex: 1;
+    border: 3px solid black;
+    border-radius: 4px;
+    margin: 5px 2px 5px 0;
+    padding: 5px;
+}
+
+.sheet-tab-character-life span {
+    flex-direction: row-reverse;
+}
+
+.sheet-tab-character-text-areas-container {
+    padding: 5px;
+    border: 3px solid black;
+    border-radius: 4px;
+    display: block;
+}
+
+.sheet-tab-character-text-area-label {
+    display: flex;
+    flex: 1;
+    flex-direction: column-reverse;
+    align-items: center;
+    font-size: 0.8rem;
+    gap: 0;
+}
+
+.sheet-tab-character-text-area {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
 }
