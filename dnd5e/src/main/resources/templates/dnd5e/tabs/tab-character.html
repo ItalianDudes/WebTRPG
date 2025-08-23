@@ -59,14 +59,29 @@
                 </span>
             </div>
         </span>
-        <span>
-            <div style="position: relative" class="sheet-tab-character-image-container">
+        <span style="display: flex;width: 100%;margin: 0;padding: 0;">
+            <div class="sheet-tab-character-image-container">
                 <img class="sheet-tab-character-image" th:src="@{/dnd5e/favicon.ico}">
-                <div style="position: absolute;top: 89%;left: 40%">ASPETTO</div>
+                <div style="position: absolute;top: 93%;left: 40%">ASPETTO</div>
             </div>
-            <div style="display: block">
-                <span></span>
-                <span>
+            <div class="sheet-tab-character-body-second-container">
+                <span class="sheet-tab-character-body-rows">
+                    <div class="sheet-tab-character-death-st" style="flex: 0 0 19.1rem;">
+                        <label>Successi<input type="number" min="0" max="3" th:value="${sheet.getTabCharacter().getSuccessDeathST()}"/></label>
+                        <label>Fallimenti<input type="number" min="0" max="3" th:value="${sheet.getTabCharacter().getFailDeathST()}"/></label>
+                    </div>
+                    <div class="sheet-tab-character-secondary-data">
+                        <span>
+                            <label style="flex: 1">Bonus di Competenza<input min="2" type="number" th:value="${sheet.getTabCharacter().getProficiencyBonus()}"/></label>
+                            <label>Iniziativa<input type="number" min="1" th:value="${sheet.getTabAbility().getDexterityModifier()}" readonly/></label>
+                        </span>
+                        <span>
+                            <label>Punti Ispirazione<input type="number" min="0" th:value="${sheet.getTabCharacter().getInspirationPoints()}"/></label>
+                            <label>Velocità<input type="text" th:value="${sheet.getTabCharacter().getSpeed()}"/></label>
+                        </span>
+                    </div>
+                </span>
+                <span class="sheet-tab-character-body-rows">
                     <div class="sheet-tab-character-text-areas-container">
                         <span>
                             <label class="sheet-tab-character-text-area-label">Tratti Caratteriali<textarea class="sheet-tab-character-text-area" th:text="${sheet.getTabCharacter().getPersonalTraits()}"></textarea></label>

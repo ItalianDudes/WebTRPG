@@ -491,11 +491,6 @@ body::before {
     margin-left:16rem;
 }
 
-#tab-content {
-    width: 100%;
-    height: 100%;
-}
-
 /* All Sheets */
 #tab-content input {
     border-radius: 4px;
@@ -533,10 +528,18 @@ body::before {
     margin-bottom: 5px;
 }
 
-.sheet-tab-character-image {
-    padding: 5px 15px 15px 15px;
+.sheet-tab-character-image-container {
+    position: relative;
     border: 3px solid black;
-    border-radius: 4px;
+    margin-bottom: 5px;
+    padding: 5px;
+    align-content: center;
+}
+
+.sheet-tab-character-image {
+    padding: 0;
+    width: 18rem;
+    height: auto;
 }
 
 .sheet-tab-character-header-container {
@@ -566,11 +569,6 @@ body::before {
     position: relative;
     left: 0;
     width: 18rem;
-}
-
-.sheet-tab-character-image {
-    width: 19rem;
-    height: auto;
 }
 
 .sheet-tab-character-ac-full {
@@ -640,7 +638,8 @@ body::before {
     flex: 1;
     border: 3px solid black;
     border-radius: 4px;
-    margin: 5px 2px 5px 0;
+    margin-bottom: 5px;
+    margin-top: 5px;
     padding: 5px;
 }
 
@@ -648,26 +647,66 @@ body::before {
     flex-direction: row-reverse;
 }
 
-.sheet-tab-character-text-areas-container {
-    padding: 5px;
+.sheet-tab-character-life span label {
+    white-space: nowrap;
+}
+
+.sheet-tab-character-body-second-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.sheet-tab-character-body-rows {
+    display: flex;
+}
+
+.sheet-tab-character-death-st {
+    display: block;
+    align-content: center;
     border: 3px solid black;
     border-radius: 4px;
+    padding: 5px;
+}
+
+.sheet-tab-character-body-rows > div {
+    flex: 1;
+}
+
+.sheet-tab-character-secondary-data {
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.sheet-tab-character-secondary-data label {
+    display: flex;
+    flex: 1;
+}
+
+.sheet-tab-character-secondary-data input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sheet-tab-character-text-areas-container {
     display: block;
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 .sheet-tab-character-text-area-label {
     display: flex;
-    flex: 1;
     flex-direction: column-reverse;
-    align-items: center;
-    font-size: 0.8rem;
-    gap: 0;
+    flex: 1;
 }
 
 .sheet-tab-character-text-area {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     width: 100%;
+    min-height: 80px;
+    box-sizing: border-box;
     resize: none;
 }
