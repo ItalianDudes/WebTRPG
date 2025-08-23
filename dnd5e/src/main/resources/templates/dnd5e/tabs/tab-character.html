@@ -66,9 +66,10 @@
             </div>
             <div class="sheet-tab-character-body-second-container">
                 <span class="sheet-tab-character-body-rows">
-                    <div class="sheet-tab-character-death-st" style="flex: 0 0 19.1rem;">
+                    <div class="sheet-tab-character-death-st" style="flex: 0 0 19.1rem;position: relative;">
                         <label>Successi<input type="number" min="0" max="3" th:value="${sheet.getTabCharacter().getSuccessDeathST()}"/></label>
                         <label>Fallimenti<input type="number" min="0" max="3" th:value="${sheet.getTabCharacter().getFailDeathST()}"/></label>
+                        <label style="position: absolute;font-size: 0.8rem; top: 78%; left: 20%;white-space: nowrap;">TIRI SALVEZZA CONTRO MORTE</label>
                     </div>
                     <div class="sheet-tab-character-secondary-data">
                         <span>
