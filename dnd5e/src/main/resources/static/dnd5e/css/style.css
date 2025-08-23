@@ -60,6 +60,7 @@ body {
     background-color: var(--background);
     color: var(--text);
     font-family: 'MedievalSharp', cursive;
+    font-size: 24px;
     line-height: 1.6;
     position: relative;
 }
@@ -733,9 +734,6 @@ body::before {
     border: 3px solid black;
     border-radius: 4px;
     padding: 5px;
-}
-.sheet-tab-ability-abilities-container div label {
-    white-space: nowrap;
 }
 .sheet-tab-ability-abilities-container > div > label:first-child {
     font-weight: bold;
