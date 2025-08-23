@@ -710,3 +710,33 @@ body::before {
     box-sizing: border-box;
     resize: none;
 }
+
+/* Sheet Tab Ability */
+.sheet-tab-ability-main-abilities,
+.sheet-tab-ability-saving-throws-container,
+.sheet-tab-ability-abilities-container {
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.sheet-tab-ability-abilities-container {
+    display: flex;
+    gap: 5px;
+}
+
+.sheet-tab-ability-abilities-container div {
+    display: inline-block;
+    vertical-align: top;
+    flex-direction: column;
+    flex: 1;
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+}
+.sheet-tab-ability-abilities-container div label {
+    white-space: nowrap;
+}
+.sheet-tab-ability-abilities-container > div > label:first-child {
+    font-weight: bold;
+}

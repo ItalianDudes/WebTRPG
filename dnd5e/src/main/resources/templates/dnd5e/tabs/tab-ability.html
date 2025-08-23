@@ -1,1 +1,64 @@
-<h1>TESTER ABILITY</h1>
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+    <span>
+        <div style="display: block;" class="sheet-tab-ability-main-abilities">
+            <label>FORZA<input type="number" min="0" th:value="${sheet.getTabAbility().getStrength()}"/></label>
+            <label>DESTREZZA<input type="number" min="0" th:value="${sheet.getTabAbility().getDexterity()}"/></label>
+            <label>COSTITUZIONE<input type="number" min="0" th:value="${sheet.getTabAbility().getConstitution()}"/></label>
+            <label>INTELLIGENZA<input type="number" min="0" th:value="${sheet.getTabAbility().getIntelligence()}"/></label>
+            <label>SAGGEZZA<input type="number" min="0" th:value="${sheet.getTabAbility().getWisdom()}"/></label>
+            <label>CARISMA<input type="number" min="0" th:value="${sheet.getTabAbility().getCharisma()}"/></label>
+        </div>
+        <div style="display: block">
+            <div class="sheet-tab-ability-saving-throws-container">
+                <label style="font-weight: bold;">TIRI SALVEZZA</label>
+                <span>
+                    <label>Forza<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Costituzione<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Saggezza<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </span>
+                <span>
+                    <label>Destrezza<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Intelligenza<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Carisma<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </span>
+            </div>
+            <div class="sheet-tab-ability-abilities-container">
+                <div>
+                    <label>FORZA</label>
+                    <label>Atletica<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </div>
+                <div>
+                    <label>DESTREZZA</label>
+                    <label>Acrobazia<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Furtività<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Rapidità di Mano<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </div>
+                <div>
+                    <label>INTELLIGENZA</label>
+                    <label>Arcano<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Indagare<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Natura<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Religione<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Storia<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </div>
+                <div>
+                    <label>SAGGEZZA</label>
+                    <label>Addestrare Animali<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Intuizione<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Medicina<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Percezione<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Sopravvivenza<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </div>
+                <div>
+                    <label>CARISMA</label>
+                    <label>Inganno<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Intimidire<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Intrattenere<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                    <label>Persuasione<select><option th:each="proficiencyLevel : ${proficiencyLevels}" th:text="${proficiencyLevel}" th:value="${proficiencyLevel}" th:selected="${proficiencyLevel.name() == 'NONE'}"></option></select></label>
+                </div>
+            </div>
+        </div>
+    </span>
+</html>

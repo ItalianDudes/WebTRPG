@@ -79,6 +79,7 @@ public final class ControllerDND5ESheets {
             Optional<DND5ESheet> optSheet = sheetRepository.findById(sheetID);
             if (optSheet.isPresent()) {
                 model.addAttribute("sheet", optSheet.get());
+                model.addAttribute("proficiencyLevels", DND5EProficiencyLevel.values());
                 switch (tabName) {
                     case "character" -> {
                         return "dnd5e/tabs/tab-character";
