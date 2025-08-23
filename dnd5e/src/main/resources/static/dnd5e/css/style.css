@@ -9,8 +9,8 @@
     --accent:         #D4AF37;
     --border:         #444444;
     --hover-bg:       rgba(212, 175, 55, 0.2);
-    --footer-height:  3rem;
-    --header-height:  3rem;
+    --footer-height:  4rem;
+    --header-height:  4rem;
 }
 
 /* 2) Full-height Layout */
@@ -432,8 +432,8 @@ body::before {
 }
 
 .dnd5e-header img.profile {
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
     border-radius: 50%;         /* Rende l'immagine circolare */
     object-fit: cover;          /* Evita distorsioni */
     border: 2px solid var(--accent); /* Optional: bordo colorato */
@@ -449,7 +449,7 @@ body::before {
     position: fixed;
     border-radius: 3px;
     background: transparent;
-    font-size: 1rem;
+    font-size: 1.25rem;
     cursor:pointer;
     z-index: 1000;
 }
