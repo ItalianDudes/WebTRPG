@@ -579,7 +579,7 @@ body::before {
 
 .sheet-tab-character-ac-full {
     clip-path: inset(50% 0 0 0); /* a metà */
-    transition: clip-path 0.5s ease;
+    transition: clip-path 2s ease;
 }
 
 .sheet-tab-character-ac-perc {
@@ -618,7 +618,7 @@ body::before {
 
 .sheet-tab-character-health-full {
     clip-path: inset(0% 0 0 0);
-    transition: clip-path 0.5s ease;
+    transition: clip-path 2s ease;
 }
 
 .sheet-tab-character-health-perc {
