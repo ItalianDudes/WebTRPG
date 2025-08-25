@@ -13,8 +13,8 @@
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newRow('armorsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteRow('armorsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('armorsProficiencyTable')">Aggiungi</button>
+                <button onclick="deleteProficiencyRow('armorsProficiencyTable')">Rimuovi</button>
             </div>
         </div>
         <div>
@@ -28,8 +28,8 @@
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newRow('weaponsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteRow('weaponsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('weaponsProficiencyTable')">Aggiungi</button>
+                <button onclick="deleteProficiencyRow('weaponsProficiencyTable')">Rimuovi</button>
             </div>
         </div>
         <div>
@@ -43,8 +43,8 @@
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newRow('toolsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteRow('toolsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('toolsProficiencyTable')">Aggiungi</button>
+                <button onclick="deleteProficiencyRow('toolsProficiencyTable')">Rimuovi</button>
             </div>
         </div>
         <div>
@@ -58,8 +58,8 @@
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newRow('activitiesProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteRow('activitiesProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('activitiesProficiencyTable')">Aggiungi</button>
+                <button onclick="deleteProficiencyRow('activitiesProficiencyTable')">Rimuovi</button>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
             return select;
         }
 
-        function newRow(tableId) {
+        function newProficiencyRow(tableId) {
             const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
             const newRow = table.insertRow();
 
@@ -91,7 +91,7 @@
             cellLivello.appendChild(createProficiencySelect());
         }
 
-        function deleteRow(tableId) {
+        function deleteProficiencyRow(tableId) {
             const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
             if (table.rows.length > 0) {
                 table.deleteRow(table.rows.length - 1);
