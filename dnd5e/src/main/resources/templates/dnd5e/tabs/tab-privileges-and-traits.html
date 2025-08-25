@@ -1,1 +1,85 @@
-<h1>TESTER PRIVILEGES AND TRAITS</h1>
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+    <div class="sheet-tab-proficiencies-languages-privileges-and-traits-main-container">
+        <div>
+            <table id="privilegesTable">
+                <thead>
+                <tr>
+                    <th>Nome Privilegio</th>
+                    <th>Descrizione</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div style="text-align:center;">
+                <button onclick="newPrivilegeRow()">Aggiungi Privilegio</button>
+                <button onclick="deletePrivilegeRow()">Rimuovi Privilegio</button>
+            </div>
+        </div>
+        <div>
+            <table id="traitsTable">
+                <thead>
+                <tr>
+                    <th>Nome Tratto</th>
+                    <th>Descrizione</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div style="text-align:center;">
+                <button onclick="newTraitRow()">Aggiungi Tratto</button>
+                <button onclick="deleteTraitRow()">Rimuovi Tratto</button>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        function newPrivilegeRow() {
+            const table = document.getElementById("privilegesTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            const cellName = newRow.insertCell(0);
+            const inputName = document.createElement("input");
+            inputName.type = "text";
+            inputName.placeholder = "Inserisci Privilegio";
+            cellName.appendChild(inputName);
+
+            const cellDescription = newRow.insertCell(1);
+            const inputDescription = document.createElement("textarea");
+            inputDescription.placeholder = "Inserisci Descrizione";
+            inputDescription.id = "sheet-tab-privileges-and-traits-text-areas"
+            cellDescription.appendChild(inputDescription);
+        }
+
+        function deletePrivilegeRow() {
+            const table = document.getElementById("privilegesTable").getElementsByTagName("tbody")[0];
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        }
+
+        function newTraitRow() {
+            const table = document.getElementById("traitsTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            const cellName = newRow.insertCell(0);
+            const inputName = document.createElement("input");
+            inputName.type = "text";
+            inputName.placeholder = "Inserisci Tratto";
+            cellName.appendChild(inputName);
+
+            const cellDescription = newRow.insertCell(1);
+            const inputDescription = document.createElement("textarea");
+            inputDescription.placeholder = "Inserisci Descrizione";
+            inputDescription.id = "sheet-tab-privileges-and-traits-text-areas"
+            cellDescription.appendChild(inputDescription);
+        }
+
+        function deleteTraitRow() {
+            const table = document.getElementById("traitsTable").getElementsByTagName("tbody")[0];
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        }
+    </script>
+</html>

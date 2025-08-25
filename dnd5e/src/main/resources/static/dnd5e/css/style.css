@@ -9,6 +9,7 @@
     --accent:         #D4AF37;
     --border:         #444444;
     --hover-bg:       rgba(212, 175, 55, 0.2);
+    --font-size:      24px;
     --footer-height:  4rem;
     --header-height:  4rem;
 }
@@ -49,6 +50,13 @@ code {
     scrollbar-width: auto;
     -ms-overflow-style: auto;
 }
+select {
+    font-size: var(--font-size);
+    border-radius: 4px;
+}
+select option {
+    background-color: var(--background);
+}
 textarea::-webkit-scrollbar,
 pre::-webkit-scrollbar,
 code::-webkit-scrollbar {
@@ -60,7 +68,7 @@ body {
     background-color: var(--background);
     color: var(--text);
     font-family: 'MedievalSharp', cursive;
-    font-size: 24px;
+    font-size: var(--font-size);
     line-height: 1.6;
     position: relative;
 }
@@ -170,6 +178,7 @@ input[type="password"],
 input[type="number"],
 textarea,
 select {
+    font-size: var(--font-size);
     background-color: var(--surface);
     border: 1px solid var(--accent);
     color: var(--text);
@@ -552,7 +561,6 @@ body::before {
 .sheet-tab-character-header-container span label {
     flex-direction: column-reverse;
     align-items: flex-start;
-    font-size: 0.8rem;
     gap: 0;
 }
 
@@ -747,16 +755,22 @@ body::before {
 }
 
 /* Sheet Tab Proficiencies */
-.sheet-tab-proficiencies-main-container {
+.sheet-tab-proficiencies-languages-privileges-and-traits-main-container {
     display: flex;
     border: 3px solid black;
     border-radius: 4px;
     padding: 5px;
     gap: 5px;
 }
-.sheet-tab-proficiencies-main-container div {
+.sheet-tab-proficiencies-languages-privileges-and-traits-main-container div {
     width: 100%;
     border: 3px solid black;
     border-radius: 4px;
     padding: 5px;
+}
+
+/* Sheet Tab Privileges And Traits */
+#sheet-tab-privileges-and-traits-text-areas {
+    resize: vertical;
+    width: 100%;
 }

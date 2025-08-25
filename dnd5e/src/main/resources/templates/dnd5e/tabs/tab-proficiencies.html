@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <!--suppress HtmlFormInputWithoutLabel -->
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
-    <div class="sheet-tab-proficiencies-main-container">
+    <div class="sheet-tab-proficiencies-languages-privileges-and-traits-main-container">
         <div>
             <table id="armorsProficiencyTable">
                 <thead>
                 <tr>
-                    <th>Competenza Armatura</th>
-                    <th>Livello</th>
+                    <th>Armatura</th>
+                    <th>Livello Competenza</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newProficiencyRow('armorsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteProficiencyRow('armorsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('armorsProficiencyTable')">Aggiungi Armatura</button>
+                <button onclick="deleteProficiencyRow('armorsProficiencyTable')">Rimuovi Armatura</button>
             </div>
         </div>
         <div>
             <table id="weaponsProficiencyTable">
                 <thead>
                 <tr>
-                    <th>Competenza Arma</th>
-                    <th>Livello</th>
+                    <th>Arma</th>
+                    <th>Livello Competenza</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newProficiencyRow('weaponsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteProficiencyRow('weaponsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('weaponsProficiencyTable')">Aggiungi Arma</button>
+                <button onclick="deleteProficiencyRow('weaponsProficiencyTable')">Rimuovi Arma</button>
             </div>
         </div>
         <div>
             <table id="toolsProficiencyTable">
                 <thead>
                 <tr>
-                    <th>Competenza Strumento</th>
-                    <th>Livello</th>
+                    <th>Strumento</th>
+                    <th>Livello Competenza</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newProficiencyRow('toolsProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteProficiencyRow('toolsProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('toolsProficiencyTable')">Aggiungi Strumento</button>
+                <button onclick="deleteProficiencyRow('toolsProficiencyTable')">Rimuovi Strumento</button>
             </div>
         </div>
         <div>
             <table id="activitiesProficiencyTable">
                 <thead>
                 <tr>
-                    <th>Competenza Attività</th>
-                    <th>Livello</th>
+                    <th>Attività</th>
+                    <th>Livello Competenza</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div style="text-align:center;">
-                <button onclick="newProficiencyRow('activitiesProficiencyTable')">Aggiungi</button>
-                <button onclick="deleteProficiencyRow('activitiesProficiencyTable')">Rimuovi</button>
+                <button onclick="newProficiencyRow('activitiesProficiencyTable')">Aggiungi Attività</button>
+                <button onclick="deleteProficiencyRow('activitiesProficiencyTable')">Rimuovi Attività</button>
             </div>
         </div>
     </div>
@@ -87,8 +87,8 @@
             inputProficiencyName.placeholder = "Inserisci competenza";
             cellProficiencyName.appendChild(inputProficiencyName);
 
-            const cellLivello = newRow.insertCell(1);
-            cellLivello.appendChild(createProficiencySelect());
+            const cellProficiencyLevel = newRow.insertCell(1);
+            cellProficiencyLevel.appendChild(createProficiencySelect());
         }
 
         function deleteProficiencyRow(tableId) {
