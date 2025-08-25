@@ -136,6 +136,9 @@ public class DND5ESheetTabAbility extends AuditableEntity {
     public int getCharismaModifier() {
         return getMainAbilityModifier(charisma);
     }
+    public int getPassiveWisdom() {
+        return 10 + proficiencyPerception.getEffectiveProficiencyBonus(getWisdomModifier(), sheet.getTabCharacter().getProficiencyBonus());
+    }
 
     // JPA Equals&HashCode
     @Override

@@ -1,1 +1,109 @@
-<h1>TESTER PROFICIENCES</h1>
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+
+<div class="sheet-tab-proficiencies-main-container">
+    <div>
+        <table id="armorsProficiencyTable">
+            <thead>
+            <tr>
+                <th>Competenza Armatura</th>
+                <th>Livello</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="text-align:center;">
+            <button onclick="newRow('armorsProficiencyTable')">Aggiungi</button>
+            <button onclick="deleteRow('armorsProficiencyTable')">Rimuovi</button>
+        </div>
+    </div>
+    <div>
+        <table id="weaponsProficiencyTable">
+            <thead>
+            <tr>
+                <th>Competenza Arma</th>
+                <th>Livello</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="text-align:center;">
+            <button onclick="newRow('weaponsProficiencyTable')">Aggiungi</button>
+            <button onclick="deleteRow('weaponsProficiencyTable')">Rimuovi</button>
+        </div>
+    </div>
+    <div>
+        <table id="toolsProficiencyTable">
+            <thead>
+            <tr>
+                <th>Competenza Strumento</th>
+                <th>Livello</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="text-align:center;">
+            <button onclick="newRow('toolsProficiencyTable')">Aggiungi</button>
+            <button onclick="deleteRow('toolsProficiencyTable')">Rimuovi</button>
+        </div>
+    </div>
+    <div>
+        <table id="activitiesProficiencyTable">
+            <thead>
+            <tr>
+                <th>Competenza Attività</th>
+                <th>Livello</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="text-align:center;">
+            <button onclick="newRow('activitiesProficiencyTable')">Aggiungi</button>
+            <button onclick="deleteRow('activitiesProficiencyTable')">Rimuovi</button>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function createSelect() {
+        const select = document.createElement("select");
+        // noinspection JSMismatchedCollectionQueryUpdate
+        const proficiencyLevels = /*[[${proficiencyLevelsReadableTexts}]]*/ [];
+        proficiencyLevels.forEach(level => {
+            const option = document.createElement("option");
+            option.value = level;
+            option.text = level;
+            select.appendChild(option);
+        });
+        return select;
+    }
+
+    function newRow(tableId) {
+        const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
+
+        const cellCompetenza = newRow.insertCell(0);
+        const inputCompetenza = document.createElement("input");
+        inputCompetenza.type = "text";
+        inputCompetenza.placeholder = "Inserisci competenza";
+        cellCompetenza.appendChild(inputCompetenza);
+
+        const cellLivello = newRow.insertCell(1);
+        cellLivello.appendChild(createSelect());
+    }
+
+    function deleteRow(tableId) {
+        const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
+        if (table.rows.length > 0) {
+            table.deleteRow(table.rows.length - 1);
+        }
+    }
+</script>
+
+
+</html>

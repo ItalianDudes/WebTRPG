@@ -1,31 +1,45 @@
 package it.italiandudes.webtrpg.dnd5e.data.sheet.enums;
 
+import org.jetbrains.annotations.NotNull;
+
 // DO NOT CHANGE THE ENUM NAMES, SOME METHODS USE THE FINAL METHOD "name()" FOR THE DB
 public enum DND5EProficiencyLevel {
-    SEVERE_INEPTITUDE,
-    INEPTITUDE,
-    NONE,
-    PROFICIENCY,
-    MASTERY;
+    SEVERE_INEPTITUDE("Grave Incompetenza"),
+    INEPTITUDE("Incompetenza"),
+    NONE("Nessuna"),
+    PROFICIENCY("Competenza"),
+    MASTERY("Maestria");
+
+    // Attributes
+    private final String readableName;
+
+    // Constructor
+    DND5EProficiencyLevel(String readableName) {
+        this.readableName = readableName;
+    }
 
     // Methods
-    public int getEffectiveProficiencyBonus(int characterProficiencyBonus) {
+    public int getEffectiveProficiencyBonus(int modifier, int characterProficiencyBonus) {
         switch (this) {
             case SEVERE_INEPTITUDE -> {
-                return -2;
+                return modifier - 2;
             }
             case INEPTITUDE -> {
-                return -1;
+                return modifier - 1;
             }
             case PROFICIENCY -> {
-                return characterProficiencyBonus;
+                return modifier + characterProficiencyBonus;
             }
             case MASTERY -> {
-                return characterProficiencyBonus*2;
+                return modifier + characterProficiencyBonus*2;
             }
             default -> {
-                return 0;
+                return modifier;
             }
         }
+    }
+    @Override @NotNull
+    public String toString() {
+        return readableName;
     }
 }

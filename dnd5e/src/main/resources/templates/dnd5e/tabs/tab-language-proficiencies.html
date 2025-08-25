@@ -1,1 +1,78 @@
-<h1>TESTER LANGUAGE PROFICIENCES</h1>
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+
+<div class="sheet-tab-proficiencies-main-container">
+    <div>
+        <table id="languagesProficiencyTable">
+            <thead>
+            <tr>
+                <th>Lingua</th>
+                <th>Alfabeto</th>
+                <th>Capacità Lettura</th>
+                <th>Capacità Scrittura</th>
+                <th>Capacità Ascolto</th>
+                <th>Capacità Parlato</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="text-align:center;">
+            <button onclick="newLanguageRow()">Aggiungi</button>
+            <button onclick="deleteLanguageRow()">Rimuovi</button>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function createLanguageSelect() {
+        const select = document.createElement("select");
+        // noinspection JSMismatchedCollectionQueryUpdate
+        const proficiencyLevels = /*[[${languageProficiencyLevelsReadableTexts}]]*/ [];
+        proficiencyLevels.forEach(level => {
+            const option = document.createElement("option");
+            option.value = level;
+            option.text = level;
+            select.appendChild(option);
+        });
+        return select;
+    }
+
+    function newLanguageRow() {
+        const table = document.getElementById("languagesProficiencyTable").getElementsByTagName("tbody")[0];
+
+        const newRow = table.insertRow();
+
+        const cellName = newRow.insertCell(0);
+        const columnName = document.createElement("input");
+        columnName.type = "text";
+        columnName.placeholder = "Nome Lingua";
+        cellName.appendChild(columnName);
+
+        const cellAlphabet = newRow.insertCell(1);
+        const columnAlphabet = document.createElement("input");
+        columnAlphabet.type = "text";
+        columnAlphabet.placeholder = "Alfabeto";
+        cellAlphabet.appendChild(columnAlphabet);
+
+        const reading = newRow.insertCell(2);
+        reading.appendChild(createLanguageSelect());
+        const writing = newRow.insertCell(3);
+        writing.appendChild(createLanguageSelect());
+        const listening = newRow.insertCell(4);
+        listening.appendChild(createLanguageSelect());
+        const speaking = newRow.insertCell(5);
+        speaking.appendChild(createLanguageSelect());
+    }
+
+    function deleteLanguageRow() {
+        const table = document.getElementById("languagesProficiencyTable").getElementsByTagName("tbody")[0];
+        if (table.rows.length > 0) {
+            table.deleteRow(table.rows.length - 1);
+        }
+    }
+</script>
+
+
+</html>

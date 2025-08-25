@@ -17,8 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public final class ControllerDND5ESheets {
@@ -80,6 +82,8 @@ public final class ControllerDND5ESheets {
             if (optSheet.isPresent()) {
                 model.addAttribute("sheet", optSheet.get());
                 model.addAttribute("proficiencyLevels", DND5EProficiencyLevel.values());
+                model.addAttribute("proficiencyLevelsReadableTexts", Arrays.stream(DND5EProficiencyLevel.values()).map(Enum::toString).collect(Collectors.toList()));
+                model.addAttribute("languageProficiencyLevelsReadableTexts", Arrays.stream(DND5ELanguageProficiencyLevel.values()).map(Enum::toString).collect(Collectors.toList()));
                 switch (tabName) {
                     case "character" -> {
                         return "dnd5e/tabs/tab-character";

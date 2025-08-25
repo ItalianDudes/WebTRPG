@@ -721,6 +721,13 @@ body::before {
     padding: 5px;
 }
 
+.sheet-tab-ability-main-ability-container {
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 3px;
+}
+
 .sheet-tab-ability-abilities-container {
     display: flex;
     gap: 5px;
@@ -737,4 +744,19 @@ body::before {
 }
 .sheet-tab-ability-abilities-container > div > label:first-child {
     font-weight: bold;
+}
+
+/* Sheet Tab Proficiencies */
+.sheet-tab-proficiencies-main-container {
+    display: flex;
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    gap: 5px;
+}
+.sheet-tab-proficiencies-main-container div {
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px;
 }
